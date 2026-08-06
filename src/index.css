@@ -1,0 +1,80 @@
+:root {
+  /* Design tokens */
+  --color-primary: #191919;
+  --color-secondary: #676767;
+  --color-brand: #835de1;
+  --color-error: #d84d4d;
+  --color-white-fixed: #ffffff;
+  --color-page-bg: #ffffff;
+  --color-card-bg: #ffffff;
+  --color-btn-bg: rgba(25, 25, 25, 0.05);
+  --color-badge-new: #82bad4;
+  --color-alert-bg: #fcd7d4;
+  --accordeon-task-default: #E2DDF6;
+  --color-separator: #e1e1e1;
+  --color-nav-hover: rgba(25, 25, 25, 0.05);
+
+  --shadow-card: 0 5px 15px rgba(0, 0, 0, 0.05);
+  --shadow-section: 0 5px 7.5px rgba(0, 0, 0, 0.05);
+
+  --radius-navigator: 16px;
+  --radius-section: 10px;
+  --radius-alert: 12px;
+  --radius-badge: 10px;
+  --radius-button: 10px;
+
+  --font-ttn: 'TT Norms Tochka Extended', system-ui, -apple-system, sans-serif;
+
+  color-scheme: light;
+  font-family: var(--font-ttn);
+  color: var(--color-primary);
+  background: var(--color-page-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+}
+
+#root {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: var(--font-ttn);
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font-ttn);
+}

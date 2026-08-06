@@ -1,0 +1,37 @@
+.state-toggle {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 2000;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--color-bg-default, #fff);
+  border-radius: var(--rounding-2-5x, 10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+.state-toggle__btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-family: var(--font-ttn);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-primitive-secondary, #676767);
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.state-toggle__btn:hover {
+  background: var(--color-bg-neutral-1, #f4f4f4);
+}
+
+.state-toggle__btn--on {
+  background: var(--color-primitive-primary, #191919);
+  color: #fff;
+}
+
+.state-toggle__btn--on:hover {
+  background: var(--color-primitive-primary, #191919);
+}

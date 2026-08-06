@@ -1,0 +1,137 @@
+.risks-page {
+  flex: 1;
+  position: relative;
+  background: var(--color-page-bg, #fff);
+  min-height: calc(100dvh - 74px);
+  padding: 32px 20px 64px;
+}
+
+.risks-back {
+  position: absolute;
+  top: 32px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--color-bg-neutral-1, #f4f4f4);
+  color: var(--color-primitive-primary, #191919);
+  transition: filter 0.15s;
+}
+
+.risks-back:hover {
+  filter: brightness(0.96);
+}
+
+/* Контент по центру, ширина 720 как в макете */
+.risks-content {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.risks-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 0 20px 40px;
+}
+
+.risks-header__title {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 40px;
+  color: var(--color-primitive-primary, #191919);
+}
+
+.risks-header__subtitle {
+  max-width: 520px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--color-primitive-secondary, #676767);
+}
+
+.risks-header__learn {
+  margin-top: 4px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: var(--color-bg-neutral-1, #f4f4f4);
+  font-family: var(--font-ttn);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-primitive-primary, #191919);
+  transition: filter 0.15s;
+}
+
+.risks-header__learn:hover {
+  filter: brightness(0.96);
+}
+
+/* Сетка карточек: 2 колонки, гэп 12px */
+.risks-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Page Action «Что влияет на пульс» */
+.risks-page-action {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+  padding: 0;
+  text-align: left;
+}
+
+.risks-page-action__icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primitive-primary, #191919);
+  font-size: 18px;
+}
+
+.risks-page-action__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.risks-page-action__title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--color-primitive-primary, #191919);
+}
+
+.risks-page-action__desc {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--color-primitive-secondary, #676767);
+}
+
+/* Тост-заглушка */
+.risks-toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2100;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: var(--color-primitive-primary, #191919);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}

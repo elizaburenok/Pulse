@@ -1,0 +1,203 @@
+import { Search, ChevronsLeft, FileText, Building2, Tag, Key, Camera, MoreHorizontal, Plus, SlidersHorizontal, ChevronRight, EyeOff } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import RiskRightColumn from '../components/home/RiskRightColumn'
+import './HomePage.css'
+
+const QUICK_ACTIONS = [
+  { icon: <FileText size={20} />, label: 'Скачать выписку' },
+  { icon: <Building2 size={20} />, label: 'Посмотреть реквизиты' },
+  { icon: <Tag size={20} />, label: 'Посмотреть тариф и лимиты' },
+  { icon: <Key size={20} />, label: 'Предоставить доступ' },
+  { icon: <Camera size={20} />, label: 'Заплатить по фото или документу' },
+]
+
+const SERVICES = [
+  { label: 'Зарплатный проект', color: '#82bebe' },
+  { label: 'Депозиты', color: '#91c089' },
+  { label: 'Эквайринг и онлайн‑кассы', color: '#82bad4' },
+  { label: 'Валютные операции', color: '#a8a3f1' },
+  { label: 'Контрагенты', color: '#82bebe' },
+]
+
+const ACCOUNTS = [
+  { type: 'Расчётный', amount: '23 422 785,37 ₽', mask: '**3486', cards: 2 },
+  { type: 'Расчётный', amount: '2 374,77 ₽', mask: '**6584', cards: 4 },
+]
+
+const TRANSACTIONS = [
+  {
+    amount: '– 250 000 ₽',
+    status: 'Исполнено',
+    counterparty: 'Лаванда, ООО',
+    description: 'Оплата лицензионного вознаграждения за использование базовой лицензии за период с 01.11.22 по 30.11.22. НДС не предусмотрен.',
+    ref: '№6884, 13:40',
+  },
+  {
+    amount: '– 2 000 ₽',
+    status: 'Исполнено',
+    counterparty: 'Дмитрий Олегович С.',
+    description: 'Перевод средств',
+    ref: '№6883, 12:15',
+  },
+]
+
+export default function HomePage() {
+  const navigate = useNavigate()
+
+  return (
+    <div className="home-page">
+      {/* Left sidebar */}
+      <aside className="home-sidebar">
+        <div className="home-sidebar__drop-area">
+          <p className="home-sidebar__drop-title">Распознать платёж</p>
+          <p className="home-sidebar__drop-subtitle">Фото, 1С или PDF</p>
+        </div>
+
+        <div className="home-sidebar__section">
+          <div className="home-sidebar__section-header">
+            <span className="home-sidebar__section-title">Быстрые действия</span>
+            <ChevronsLeft size={20} color="var(--color-secondary)" />
+          </div>
+          <div className="home-sidebar__actions">
+            {QUICK_ACTIONS.map((action) => (
+              <button key={action.label} className="home-sidebar__action-item">
+                <span className="home-sidebar__action-icon">{action.icon}</span>
+                <span className="home-sidebar__action-label">{action.label}</span>
+              </button>
+            ))}
+            <button className="home-sidebar__action-item home-sidebar__action-item--muted">
+              <span className="home-sidebar__action-icon">
+                <MoreHorizontal size={20} />
+              </span>
+              <span className="home-sidebar__action-label">Все действия</span>
+            </button>
+          </div>
+        </div>
+
+        <div className="home-sidebar__section">
+          <div className="home-sidebar__section-header">
+            <span className="home-sidebar__section-title">Мои сервисы</span>
+          </div>
+          <div className="home-sidebar__services">
+            {SERVICES.map((service) => (
+              <button key={service.label} className="home-sidebar__service-item">
+                <div className="home-sidebar__service-avatar" style={{ background: service.color }} />
+                <span className="home-sidebar__service-label">{service.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </aside>
+
+      {/* Main content */}
+      <main className="home-page__content">
+        <div className="home-main-col">
+        {/* Search */}
+        <div className="home-search">
+          <Search size={18} color="var(--color-secondary)" className="home-search__icon" />
+          <input className="home-search__input" placeholder="Поиск по Точке" readOnly />
+        </div>
+
+        {/* Напоминание об уплате налога — ведёт в раздел рисков */}
+        <button className="home-mp-banner" onClick={() => navigate('/risks')}>
+          <div className="home-mp-banner__text">
+            <p className="home-mp-banner__title">Уплатите налог по УСН за I квартал</p>
+            <p className="home-mp-banner__subtitle">до 28 апреля вам нужно уплатить 1 469 ₽</p>
+          </div>
+          <ChevronRight size={20} color="var(--color-brand)" className="home-mp-banner__chevron" />
+        </button>
+
+        {/* Accounts */}
+        <div className="home-section">
+          <div className="home-section__header">
+            <div className="home-tabs">
+              <button className="home-tab home-tab--active">Счета</button>
+              <button className="home-tab">Валюта</button>
+              <button className="home-tab">Фонды</button>
+              <button className="home-tab">Карты</button>
+            </div>
+            <button className="home-add-btn">
+              Добавить <Plus size={16} />
+            </button>
+          </div>
+
+          <div className="home-accounts">
+            {ACCOUNTS.map((acc) => (
+              <div key={acc.mask} className="home-account-card">
+                <div className="home-account-card__header">
+                  <div className="home-account-card__type-row">
+                    <span className="home-account-card__flag">🇷🇺</span>
+                    <span className="home-account-card__type">{acc.type}</span>
+                  </div>
+                  <button className="home-account-card__menu">•••</button>
+                </div>
+                <p className="home-account-card__amount">{acc.amount}</p>
+                <div className="home-account-card__footer">
+                  <span className="home-account-card__mask">{acc.mask}</span>
+                  <span className="home-account-card__cards">{acc.cards} 🪪</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="home-accounts-total">
+            <span>Всего 7 счетов на 2 549 670,21 ₽</span>
+            <ChevronRight size={16} />
+            <button className="home-accounts-total__eye"><EyeOff size={18} /></button>
+          </div>
+        </div>
+
+        {/* History */}
+        <div className="home-section">
+          <div className="home-section__header">
+            <div className="home-tabs">
+              <button className="home-tab home-tab--active">История</button>
+              <button className="home-tab">
+                На подпись <span className="home-badge">2</span>
+              </button>
+              <button className="home-tab">Автоплатежи</button>
+            </div>
+          </div>
+
+          <div className="home-history-card">
+            <div className="home-filters">
+              <button className="home-filter-chip"><SlidersHorizontal size={14} /></button>
+              <button className="home-filter-chip">На подпись <span className="home-filter-chip__arrow">▾</span></button>
+              <button className="home-filter-chip">За всё время <span className="home-filter-chip__arrow">▾</span></button>
+              <button className="home-filter-chip">Счёт <span className="home-filter-chip__arrow">▾</span></button>
+              <button className="home-filter-chip">Карта <span className="home-filter-chip__arrow">▾</span></button>
+              <button className="home-filter-chip">Категория <span className="home-filter-chip__arrow">▾</span></button>
+            </div>
+
+            <div className="home-history-search">
+              <Search size={16} color="var(--color-secondary)" />
+              <input className="home-history-search__input" placeholder="Контрагент, сумма, назначение" readOnly />
+            </div>
+
+            <p className="home-history-date">Сегодня, 2 апреля</p>
+
+            <div className="home-transactions">
+              {TRANSACTIONS.map((tx) => (
+                <div key={tx.ref} className="home-transaction">
+                  <div className="home-transaction__left">
+                    <p className="home-transaction__amount">{tx.amount}</p>
+                    <p className="home-transaction__status">{tx.status}</p>
+                  </div>
+                  <div className="home-transaction__right">
+                    <p className="home-transaction__counterparty">{tx.counterparty}</p>
+                    <p className="home-transaction__desc">{tx.description}</p>
+                    <p className="home-transaction__ref">{tx.ref}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        </div>
+
+        {/* Правая колонка — виджет «Пульс бухгалтерии» */}
+        <RiskRightColumn />
+      </main>
+    </div>
+  )
+}

@@ -1,0 +1,359 @@
+/**
+ * CSS Variables for Design Tokens
+ * Generated from Figma variables structure
+ * 
+ * Usage:
+ *   color: var(--color-primitive-primary);
+ *   padding: var(--spacing-1x);
+ */
+
+:root {
+  /* Colors - Primitive */
+  --color-primitive-primary: #191919;
+  --color-primitive-primary-fixed: #191919;
+  --color-primitive-primary-on-inverse: #ffffff;
+  --color-primitive-primary-on-inverse-fixed: #ffffff;
+  
+  --color-primitive-secondary: #676767;
+  --color-primitive-secondary-fixed: #676767;
+  --color-primitive-secondary-on-inverse: #aeaeae;
+  --color-primitive-secondary-on-inverse-fixed: #aeaeae;
+  
+  --color-primitive-neutral-4: #949494;
+  --color-primitive-neutral-4-fixed: #949494;
+  --color-primitive-neutral-4-on-inverse: #777777;
+  --color-primitive-neutral-4-on-inverse-fixed: #777777;
+  
+  --color-primitive-neutral-3: #c8c8c8;
+  --color-primitive-neutral-3-fixed: #c8c8c8;
+  --color-primitive-neutral-3-on-inverse: #5e5e5e;
+  --color-primitive-neutral-3-on-inverse-fixed: #5e5e5e;
+  
+  --color-primitive-neutral-2: #d4d4d4;
+  --color-primitive-neutral-2-fixed: #d4d4d4;
+  --color-primitive-neutral-2-on-inverse: #525252;
+  --color-primitive-neutral-2-on-inverse-fixed: #525252;
+  
+  --color-primitive-neutral-1: #e1e1e1;
+  --color-primitive-neutral-1-fixed: #e1e1e1;
+  --color-primitive-neutral-1-on-inverse: #474747;
+  --color-primitive-neutral-1-on-inverse-fixed: #474747;
+  
+  --color-primitive-default: #ffffff;
+  --color-primitive-default-fixed: #ffffff;
+  
+  --color-primitive-brand: #835de1;
+  --color-primitive-brand-fixed: #835de1;
+  --color-primitive-brand-on-inverse: #9b7ef1;
+  
+  --color-primitive-error: #d84d4d;
+  --color-primitive-error-fixed: #d84d4d;
+  --color-primitive-error-on-inverse: #fc6667;
+  
+  --color-primitive-success: #5cad9a;
+  --color-primitive-success-fixed: #5cad9a;
+  --color-primitive-success-on-inverse: #5cad9a;
+  
+  --color-primitive-warning: #f0c555;
+  --color-primitive-warning-fixed: #f0c555;
+  --color-primitive-warning-on-inverse: #f0c555;
+  
+  /* Colors - State */
+  --color-state-container-transparent-1-active: rgba(25, 25, 25, 0.1); /* #1919191a */
+  --color-state-bg-brand-active: #9b7ef1;
+  --color-state-bg-default-fixed-active: rgba(255, 255, 255, 0.9); /* #ffffffe5 */
+  
+  /* Colors - Translucent */
+  --color-translucent-primitive-neutral-4: rgba(25, 25, 25, 0.45); /* #19191973 */
+  
+  /* Colors - Background */
+  --color-bg-neutral-5: #777777;
+  --color-bg-neutral-4: #aeaeae;
+  --color-bg-neutral-3: #e1e1e1;
+  --color-bg-neutral-2: #eeeeee;
+  --color-bg-neutral-1: #f4f4f4;
+  
+  --color-bg-default: #ffffff;
+  --color-bg-default-fixed: #ffffff;
+  
+  --color-bg-inverse: #191919;
+  --color-bg-inverse-fixed: #191919;
+  
+  --color-bg-brand: #835de1;
+  --color-bg-brand-fixed: #835de1;
+  --color-bg-brand-5: #b39df7;
+  --color-bg-brand-4: #cabef3;
+  --color-bg-brand-3: #d6cef3;
+  --color-bg-brand-2: #e2ddf6;
+  --color-bg-brand-1: #efedf8;
+  
+  /* Colors - Container */
+  --color-container-default: #ffffff;
+  --color-container-transparent-1: rgba(25, 25, 25, 0.05);
+  --color-container-transparent-1-fixed: rgba(25, 25, 25, 0.05);
+  --color-container-transparent-1-on-inverse-fixed: rgba(255, 255, 255, 0.1); /* #ffffff1a */
+  
+  /* Colors - Page */
+  --color-page-primary: #ffffff;
+  --color-page-secondary: #f9f9f9;
+  
+  /* Colors - Overlay */
+  --color-overlay-popup: rgba(25, 25, 25, 0.4);
+  --color-overlay-primary-alpha-050: rgba(25, 25, 25, 0.5);
+  --color-overlay-primary-alpha-050-fixed: rgba(25, 25, 25, 0.5);
+  
+  /* Typography */
+  --font-family-primary: "TT Norms Tochka Extended", sans-serif;
+  
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-demi-bold: 600;
+  
+  --font-size-xs: 12px;
+  --font-size-m: 16px;
+  
+  --line-height-xs: 15px;
+  --line-height-m: 20px;
+  
+  --letter-spacing-xs: 0.12px;
+  --letter-spacing-m: 0.16px;
+  
+  /* Spacing */
+  --spacing-base: 4px;
+  --spacing-1x: 4px;
+  --spacing-6x: 24px;
+  --spacing-8x: 32px;
+  --spacing-12x: 48px;
+  
+  /* Semantic spacing (from Figma specification) */
+  --spacing-1-5x: 6px;
+  --spacing-xs: 10px;
+  --spacing-s: 15px;
+  --spacing-m: 20px;
+  --spacing-xl: 30px;
+  /* Content column bottom (e.g. ContentOffer 60px) */
+  --spacing-2xl: 60px;
+  
+  /* Borders — service / status strips (Figma rgba 25,25,25,0.2) */
+  --color-border-default: rgba(25, 25, 25, 0.2);
+  /* Bank-02 Input — focus ring and error divider (Figma 1:905) */
+  --border-width-input-focus: 2px;
+  
+  /* Elevation — raised card (Surfaces/Card: 0 5px 15px rgba(0,0,0,0.05)) */
+  --shadow-surface-card: 0 5px 15px rgba(0, 0, 0, 0.05);
+  
+  /* Rounding */
+  --rounding-base: 4px;
+  --rounding-1x: 4px;
+  
+  /* Additional rounding values (from Figma specification) */
+  --rounding-1-5x: 6px;
+  --rounding-2-5x: 10px;
+  --rounding-3x: 12px;
+  --rounding-4-5x: 18px;
+  
+  /* Popup/Primary color (for modal/popup backgrounds) */
+  --color-popup-primary: #ffffff;
+  
+  /* Category colors (for segmented bars) */
+  --color-category-sand: #de9c7e;
+  --color-category-coral: #e59594;
+  --color-category-flamingo: #d796c1;
+  --color-category-orchid: #c799df;
+  --color-category-amethyst: #b79fe9;
+  --color-category-indigo: #95aee2;
+
+  /* Semantic aliases (leasing / bank badge patterns from Figma) */
+  --color-success: var(--color-primitive-success);
+  --color-error: var(--color-primitive-error);
+  --color-text-muted: var(--color-primitive-secondary);
+
+  /* Badge surfaces — Bank organisms / SCI Badge */
+  --color-bg-error-2: #fcd7d4;
+  --color-bg-success-2: #d4ede6;
+  --color-badge-text-neutral: var(--color-primitive-secondary);
+  --color-badge-text-purple-bright: #915de6;
+  --color-badge-text-risk-high: var(--color-primitive-error);
+  --color-badge-text-success: #3d8a7a;
+
+  /* Text L / Text S (Company List Item) */
+  --font-size-l: 18px;
+  --line-height-l: 22px;
+  --font-size-s: 14px;
+  --line-height-s: 18px;
+  --letter-spacing-s: 0.14px;
+
+  /* Extended scale — Cell titles / navigator (4px grid) */
+  --font-size-title-l: 20px;
+  --line-height-title-l: 24px;
+  --font-size-title-xl: 22px;
+  --line-height-title-xl: 26px;
+  --font-size-2xl: 24px;
+  --line-height-2xl: 30px;
+  --font-size-3xl: 28px;
+  --line-height-3xl: 34px;
+  --font-size-5xl: 32px;
+  --line-height-5xl: 36px;
+  --font-size-6xl: 40px;
+  --line-height-6xl: 46px;
+
+  /* Second-level translucent surface (hover) */
+  --color-container-transparent-2: rgba(25, 25, 25, 0.08);
+
+  /* Drop shadow color for small elevated controls (e.g. Cell accessory) */
+  --color-shadow-card-drop: rgba(25, 25, 25, 0.12);
+
+  /* Layout — playground column cap */
+  --layout-preview-column-max: 560px;
+
+  /* Rounding aliases used by CSS modules */
+  --rounding-4x: 16px;
+  --rounding-10x: 40px;
+
+  /* --------------------------------------------------------------------------
+   * Spacing — `space-*` names consumed by component CSS Modules (4px base)
+   * -------------------------------------------------------------------------- */
+  --space-0-5x: calc(0.5 * var(--spacing-base));
+  --space-1x: var(--spacing-1x);
+  --space-1-25x: calc(1.25 * var(--spacing-base));
+  --space-1-5x: var(--spacing-1-5x);
+  --space-1-75x: calc(1.75 * var(--spacing-base));
+  --space-2x: calc(2 * var(--spacing-base));
+  --space-2-5x: calc(2.5 * var(--spacing-base));
+  --space-3x: calc(3 * var(--spacing-base));
+  --space-3-5x: calc(3.5 * var(--spacing-base));
+  --space-4x: calc(4 * var(--spacing-base));
+  --space-4-5x: calc(4.5 * var(--spacing-base));
+  --space-5x: var(--spacing-m);
+  --space-6x: var(--spacing-6x);
+  --space-6-25x: calc(6.25 * var(--spacing-base));
+  --space-6-5x: calc(6.5 * var(--spacing-base));
+  --space-7x: calc(7 * var(--spacing-base));
+  --space-7-5x: var(--spacing-xl);
+  --space-8x: var(--spacing-8x);
+  --space-8-5x: calc(8.5 * var(--spacing-base));
+  --space-9-5x: calc(9.5 * var(--spacing-base));
+  --space-10x: calc(10 * var(--spacing-base));
+  --space-11x: calc(11 * var(--spacing-base));
+  --space-14x: calc(14 * var(--spacing-base));
+  --space-15x: calc(15 * var(--spacing-base));
+  --space-18x: calc(18 * var(--spacing-base));
+  --space-offset-xxl: min(90vw, var(--layout-preview-column-max));
+
+  /* --------------------------------------------------------------------------
+   * Semantic color aliases — `t-*` tokens in component CSS Modules
+   * -------------------------------------------------------------------------- */
+  --t-primitive-primary: var(--color-primitive-primary);
+  --t-primitive-secondary: var(--color-primitive-secondary);
+  --t-primitive-neutral-3: var(--color-primitive-neutral-3);
+  --t-primitive-neutral-4: var(--color-primitive-neutral-4);
+  --t-primitive-default-fixed: var(--color-primitive-default-fixed);
+  --t-primitive-brand: var(--color-primitive-brand);
+  --t-primitive-brand-on-inverse: var(--color-primitive-brand-on-inverse);
+  --t-primitive-error: var(--color-primitive-error);
+  --t-primitive-default: var(--color-primitive-default);
+  --t-bg-brand: var(--color-bg-brand);
+  --t-bg-brand-1: var(--color-bg-brand-1);
+  --t-bg-error: var(--color-bg-error-2);
+  --t-bg-default: var(--color-bg-default);
+  --t-bg-default-fixed: var(--color-bg-default-fixed);
+  --t-bg-neutral-1: var(--color-bg-neutral-1);
+  --t-bg-neutral-2: var(--color-bg-neutral-2);
+  --t-bg-neutral-3: var(--color-bg-neutral-3);
+  --t-container-transparent-1: var(--color-container-transparent-1);
+  --t-container-transparent-2: var(--color-container-transparent-2);
+  --t-container-default: var(--color-container-default);
+  --t-container-transparent-1-on-inverse-fixed: var(--color-container-transparent-1-on-inverse-fixed);
+  --t-state-bg-defaultfixedactive: var(--color-state-bg-default-fixed-active);
+  --t-translucent-primitive-neutral-4: var(--color-translucent-primitive-neutral-4);
+  --t-shadow-card: var(--color-shadow-card-drop);
+
+  /* --------------------------------------------------------------------------
+   * Typography aliases — `text-*` / `font-ui` in component CSS Modules
+   * -------------------------------------------------------------------------- */
+  --font-ui: var(--font-family-primary);
+
+  --text-s-size: var(--font-size-s);
+  --text-s-line: var(--line-height-s);
+  --text-s-weight: var(--font-weight-regular);
+  --text-s-tracking: var(--letter-spacing-s);
+
+  --text-m-size: var(--font-size-m);
+  --text-m-line: var(--line-height-m);
+  --text-m-weight: var(--font-weight-regular);
+  --text-m-tracking: var(--letter-spacing-m);
+
+  --text-l-size: var(--font-size-m);
+  --text-l-line: var(--line-height-m);
+  --text-l-weight: var(--font-weight-medium);
+
+  --text-xl-size: var(--font-size-l);
+  --text-xl-line: var(--line-height-l);
+  --text-xl-weight: var(--font-weight-demi-bold);
+
+  --text-body-s-size: var(--font-size-s);
+  --text-body-s-line: var(--line-height-s);
+  --text-body-s-weight: var(--font-weight-regular);
+  --text-body-s-tracking: var(--letter-spacing-s);
+
+  --text-counter-size: var(--font-size-xs);
+  --text-counter-line: var(--line-height-xs);
+  --text-counter-weight: var(--font-weight-medium);
+
+  /* Cell title steps */
+  --text-cell-title-5xl-size: var(--font-size-6xl);
+  --text-cell-title-5xl-line: var(--line-height-6xl);
+  --text-cell-title-5xl-weight: var(--font-weight-demi-bold);
+  --text-cell-title-5xl-tracking: var(--letter-spacing-m);
+
+  --text-cell-title-4xl-size: var(--font-size-5xl);
+  --text-cell-title-4xl-line: var(--line-height-5xl);
+  --text-cell-title-4xl-weight: var(--font-weight-demi-bold);
+  --text-cell-title-4xl-tracking: var(--letter-spacing-m);
+
+  --text-cell-title-3xl-size: var(--font-size-3xl);
+  --text-cell-title-3xl-line: var(--line-height-3xl);
+  --text-cell-title-3xl-weight: var(--font-weight-demi-bold);
+  --text-cell-title-3xl-tracking: var(--letter-spacing-m);
+
+  --text-cell-title-2xl-size: var(--font-size-2xl);
+  --text-cell-title-2xl-line: var(--line-height-2xl);
+  --text-cell-title-2xl-weight: var(--font-weight-demi-bold);
+  --text-cell-title-2xl-tracking: var(--letter-spacing-m);
+
+  --text-cell-title-xl-size: var(--font-size-title-xl);
+  --text-cell-title-xl-line: var(--line-height-title-xl);
+  --text-cell-title-xl-weight: var(--font-weight-demi-bold);
+  --text-cell-title-xl-tracking: var(--letter-spacing-m);
+
+  --text-cell-title-l-size: var(--font-size-title-l);
+  --text-cell-title-l-line: var(--line-height-title-l);
+  --text-cell-title-l-weight: var(--font-weight-demi-bold);
+  --text-cell-title-l-tracking: var(--letter-spacing-m);
+
+  --text-cell-title-m-size: var(--font-size-l);
+  --text-cell-title-m-line: var(--line-height-l);
+  --text-cell-title-m-weight: var(--font-weight-medium);
+  --text-cell-title-m-tracking: var(--letter-spacing-m);
+
+  --text-cell-title-s-size: var(--font-size-m);
+  --text-cell-title-s-line: var(--line-height-m);
+  --text-cell-title-s-weight: var(--font-weight-medium);
+  --text-cell-title-s-tracking: var(--letter-spacing-m);
+
+  --text-cell-title-xs-size: var(--font-size-s);
+  --text-cell-title-xs-line: var(--line-height-s);
+  --text-cell-title-xs-weight: var(--font-weight-medium);
+  --text-cell-title-xs-tracking: var(--letter-spacing-s);
+
+  /* --------------------------------------------------------------------------
+   * Radius / stroke / elevation aliases
+   * -------------------------------------------------------------------------- */
+  --radius-2-5x: var(--rounding-2-5x);
+  --radius-4x: var(--rounding-4x);
+  --radius-4-5x: var(--rounding-4-5x);
+  --radius-10x: var(--rounding-10x);
+  --stroke-2: var(--border-width-input-focus);
+  --shadow-card: var(--shadow-surface-card);
+}
+

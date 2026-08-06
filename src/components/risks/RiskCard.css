@@ -1,0 +1,73 @@
+.risk-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 128px;
+  padding: 20px 16px 14px;
+  border-radius: 20px; /* Rounding 5x — нет токена в DS, из Figma */
+  text-align: left;
+  background: var(--color-bg-neutral-1, #f4f4f4);
+  border: none;
+  cursor: default;
+  transition:
+    filter 0.15s,
+    transform 0.05s;
+}
+
+.risk-card__label {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  color: var(--color-translucent-primitive-neutral-4, rgba(25, 25, 25, 0.45));
+}
+
+.risk-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.risk-card__title {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  color: var(--color-primitive-primary, #191919);
+}
+
+.risk-card__subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--color-primitive-secondary, #676767);
+}
+
+/* ── Жёлтый: требует внимания ── */
+.risk-card--attention {
+  background: #fcf5e3; /* Bg/Warning 1 — нет в DS, из Figma */
+}
+
+.risk-card--attention .risk-card__subtitle {
+  color: #9a7811; /* Warning Dark — из Figma */
+}
+
+/* ── Красный: просрочка ── */
+.risk-card--overdue {
+  background: #fbe6e6; /* светло-красный — из Figma */
+}
+
+.risk-card--overdue .risk-card__subtitle {
+  color: var(--color-primitive-error, #d84d4d);
+}
+
+/* ── Интерактивность (только рисковые карточки) ── */
+.risk-card--interactive {
+  cursor: pointer;
+}
+
+.risk-card--interactive:hover {
+  filter: brightness(0.98);
+}
+
+.risk-card--interactive:active {
+  transform: translateY(1px);
+}

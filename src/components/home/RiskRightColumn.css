@@ -1,0 +1,129 @@
+.right-col {
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Виджет «Пульс бухгалтерии» ── */
+.pulse-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  text-align: left;
+  background: var(--color-bg-default, #fff);
+  border: 1px solid var(--color-primitive-neutral-1, #e1e1e1);
+  border-radius: 16px;
+  padding: 20px;
+  cursor: pointer;
+  transition:
+    box-shadow 0.15s,
+    transform 0.05s;
+}
+
+.pulse-widget:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.pulse-widget:active {
+  transform: translateY(1px);
+}
+
+.pulse-widget__head,
+.side-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pulse-widget__title,
+.side-card__title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 22px;
+  color: var(--color-primitive-primary, #191919);
+}
+
+.pulse-widget__body {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pulse-widget__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.pulse-widget__status {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--color-primitive-primary, #191919);
+}
+
+.pulse-widget__desc {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 17px;
+  color: var(--color-primitive-secondary, #676767);
+}
+
+/* ── Дополнительная карточка (задачи) ── */
+.side-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--color-bg-default, #fff);
+  border: 1px solid var(--color-primitive-neutral-1, #e1e1e1);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.side-card__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.side-card__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.side-card__dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.side-card__dot--pink {
+  background: #f3d1d1;
+}
+
+.side-card__dot--green {
+  background: #c9e7d3;
+}
+
+.side-card__item-title {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 19px;
+  color: var(--color-primitive-primary, #191919);
+}
+
+.side-card__item-desc {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 17px;
+  color: var(--color-primitive-secondary, #676767);
+}
