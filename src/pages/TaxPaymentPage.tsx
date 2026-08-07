@@ -1,20 +1,26 @@
 import { useState } from 'react'
 import { ArrowLeft, Pencil, Scale, Copy, ChevronDown } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import './DestinationPage.css'
 
 export default function TaxPaymentPage() {
   const navigate = useNavigate()
+  const location = useLocation()
   const [toast, setToast] = useState<string | null>(null)
+  const backState = location.state ?? undefined
+
+  function goBack() {
+    navigate('/risks', { state: backState })
+  }
 
   function done(msg: string) {
     setToast(msg)
-    window.setTimeout(() => navigate('/risks'), 900)
+    window.setTimeout(() => navigate('/risks', { state: backState }), 900)
   }
 
   return (
     <div className="dest-page">
-      <button className="dest-back" onClick={() => navigate('/risks')} aria-label="Назад">
+      <button className="dest-back" onClick={goBack} aria-label="Назад">
         <ArrowLeft size={20} />
       </button>
 

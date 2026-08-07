@@ -6,7 +6,7 @@ export type Severity = 'ok' | 'attention' | 'overdue'
 export type CategoryId = 'taxes' | 'reporting' | 'operations' | 'limit' | 'patent'
 
 /** Куда ведёт задача при выполнении. null — заглушка/тост. */
-export type TaskTarget = 'tax' | 'ens' | null
+export type TaskTarget = 'tax' | 'contributions' | 'ens' | null
 
 /** Логотип задачи в дровере — из src/logo. Без иконки — нейтральный кружок. */
 export type TaskIcon = 'taxes' | 'contributions'
@@ -36,8 +36,8 @@ export interface CategoryDef {
 
 /** Канонический порядок категорий (как в базовом макете). */
 export const CATEGORY_ORDER: CategoryId[] = [
-  'taxes',
   'reporting',
+  'taxes',
   'operations',
   'limit',
   'patent',
@@ -127,8 +127,8 @@ export type PageStatus = 'ok' | 'attention' | 'overdue'
 
 const STATUS_TITLE: Record<PageStatus, string> = {
   ok: 'Всё в порядке',
-  attention: 'Требует внимания',
-  overdue: 'Есть проблемы',
+  attention: 'Обратите внимание',
+  overdue: 'Серьёзно рискуете',
 }
 
 /** Подзаголовок под конкретный активный риск (attention / overdue). */
@@ -157,9 +157,9 @@ const CATEGORY_SUBTITLE: Record<CategoryId, Record<'attention' | 'overdue', stri
 }
 
 const OK_SUBTITLE =
-  'Все расчёты верны, отчётность на месте. Спокойно занимайтесь своими делами, всё под контролем.'
-const MULTI_ATTENTION = 'Проверьте начисления и сроки, чтобы не получить штраф'
-const MULTI_OVERDUE = 'Решите вопросы, чтобы вернуть хороший пульс и избежать блокировки'
+  'Налоги уплачены, отчётность сдана. Чувствуете? Даже дышится свободнее.'
+const MULTI_ATTENTION = 'Есть вопросы в нескольких разделах — решите их, чтобы не получить пени'
+const MULTI_OVERDUE = 'Несколько вопросов требуют срочного решения — иначе счёт заблокируют'
 
 export interface HeaderText {
   status: PageStatus

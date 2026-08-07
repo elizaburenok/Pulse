@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowLeft } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useRiskState } from '../context/RiskStateContext'
 import {
   CATEGORIES,
@@ -21,14 +21,28 @@ const RANK: Record<Severity, number> = { overdue: 0, attention: 1, ok: 2 }
 
 export default function RisksPage() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { scenario, levels } = useRiskState()
-  const [drawer, setDrawer] = useState<{ title: string; tasks: Task[] } | null>(null)
+  const [drawerId, setDrawerId] = useState<CategoryId | null>(null)
   const [toast, setToast] = useState<string | null>(null)
+
+  // Если сюда вернулись «Назад» из задачи, открытой через дровер,
+  // открываем дровер заново вместо голой страницы рисков.
+  useEffect(() => {
+    const reopenId = (location.state as { reopenDrawerId?: CategoryId } | null)?.reopenDrawerId
+    if (reopenId) {
+      setDrawerId(reopenId)
+      navigate(location.pathname, { replace: true, state: null })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const drawer = drawerId ? { id: drawerId, title: CATEGORIES[drawerId].label, tasks: scenario.levels[drawerId].tasks } : null
 
   const header = headerText(levels)
 
   // Рисковые категории со справочным материалом → показываем «Изучить».
-  // В статусе «Есть проблемы» кнопка не нужна: там все задачи решаются
+  // В статусе «Серьёзно рискуете» кнопка не нужна: там все задачи решаются
   // напрямую через карточки.
   const hasLearnMore =
     header.status !== 'overdue' &&
@@ -38,9 +52,11 @@ export default function RisksPage() {
   // внутри группы — канонический порядок.
   const ordered = [...CATEGORY_ORDER].sort((a, b) => RANK[levels[a]] - RANK[levels[b]])
 
-  function openTask(target: Task['target']) {
-    if (target === 'tax') navigate('/risks/tax')
-    else if (target === 'ens') navigate('/risks/ens')
+  function openTask(target: Task['target'], reopenDrawerId?: CategoryId) {
+    const state = reopenDrawerId ? { reopenDrawerId } : undefined
+    if (target === 'tax') navigate('/risks/tax', { state })
+    else if (target === 'contributions') navigate('/risks/contributions', { state })
+    else if (target === 'ens') navigate('/risks/ens', { state })
     else showToast('Открываю задачу…')
   }
 
@@ -52,7 +68,7 @@ export default function RisksPage() {
   function handleCard(id: CategoryId) {
     const tasks = scenario.levels[id].tasks
     if (tasks.length > 1) {
-      setDrawer({ title: CATEGORIES[id].label, tasks })
+      setDrawerId(id)
     } else if (tasks.length === 1) {
       openTask(tasks[0].target)
     } else {
@@ -108,10 +124,9 @@ export default function RisksPage() {
         open={!!drawer}
         title={drawer?.title ?? ''}
         tasks={drawer?.tasks ?? []}
-        onClose={() => setDrawer(null)}
+        onClose={() => setDrawerId(null)}
         onSelect={(task) => {
-          setDrawer(null)
-          openTask(task.target)
+          openTask(task.target, drawerId ?? undefined)
         }}
       />
 

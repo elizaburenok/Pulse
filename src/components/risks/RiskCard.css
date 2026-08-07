@@ -46,17 +46,9 @@
   background: #fcf5e3; /* Bg/Warning 1 — нет в DS, из Figma */
 }
 
-.risk-card--attention .risk-card__subtitle {
-  color: #9a7811; /* Warning Dark — из Figma */
-}
-
 /* ── Красный: просрочка ── */
 .risk-card--overdue {
   background: #fbe6e6; /* светло-красный — из Figma */
-}
-
-.risk-card--overdue .risk-card__subtitle {
-  color: var(--color-primitive-error, #d84d4d);
 }
 
 /* ── Интерактивность (только рисковые карточки) ── */
