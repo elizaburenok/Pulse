@@ -30,7 +30,6 @@ export default function TaxPaymentPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const { closeTask, levels } = useRiskState()
-  const overdue = levels.taxes === 'overdue'
   const [toast, setToast] = useState<string | null>(null)
   const [showConfirm, setShowConfirm] = useState(false)
   const [showResult, setShowResult] = useState(false)
@@ -62,7 +61,7 @@ export default function TaxPaymentPage() {
 
   return (
     <div className="dest-page">
-      <button className="dest-back" onClick={goBack} aria-label="Назад">
+      <button className="dest-back dest-back--outline" onClick={goBack} aria-label="Назад">
         <ArrowLeft size={20} />
       </button>
 
@@ -75,9 +74,7 @@ export default function TaxPaymentPage() {
       <main className="dest-main">
         <div className="dest-amount">
           <p className="dest-amount__value">486 973 ₽</p>
-          <p className={`dest-amount__due${overdue ? ' dest-amount__due--overdue' : ''}`}>
-            {dueLabel(levels.taxes, '28 июля')}
-          </p>
+          <p className="dest-amount__due">{dueLabel(levels.taxes, '25 июля')}</p>
         </div>
 
         <button className="dest-chip" onClick={() => setToast('Изменение суммы недоступно в прототипе')}>
