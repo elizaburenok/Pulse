@@ -49,13 +49,7 @@ export default function TasksDrawer({ open, title, tasks, severity, onClose, onS
                 )}
                 <span className="drawer__item-text">
                   <span className="drawer__item-title">{task.title}</span>
-                  <span
-                    className={`drawer__item-due${
-                      severity === 'overdue' ? ' drawer__item-due--overdue' : ''
-                    }`}
-                  >
-                    {dueLabel(severity, task.date)}
-                  </span>
+                  <span className="drawer__item-due">{dueLabel(severity, task.date)}</span>
                 </span>
               </button>
             </li>

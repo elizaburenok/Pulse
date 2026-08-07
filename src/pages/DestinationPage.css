@@ -25,6 +25,13 @@
   filter: brightness(0.96);
 }
 
+/* Обводка вместо заливки — как на странице уплаты взносов (node 40005294-172109). */
+.dest-back--outline {
+  background: transparent;
+  border: 1px solid var(--color-translucent-primitive-neutral-4, rgba(25, 25, 25, 0.45));
+  border-radius: 10px;
+}
+
 /* Левая колонка с крошкой и заголовком */
 .dest-rail {
   position: absolute;
@@ -78,13 +85,13 @@
   color: var(--color-primitive-primary, #191919);
 }
 
+/* TTN 500/S (Medium 14/18, tracking 0.14px). На эту страницу попадают только
+   по рисковой задаче (обратите внимание / серьёзно рискуете) — срок всегда красный. */
 .dest-amount__due {
   font-size: 14px;
-  color: var(--color-primitive-secondary, #676767);
-}
-
-/* Просрочка — «Срок вышел …» красным. */
-.dest-amount__due--overdue {
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0.14px;
   color: var(--color-primitive-error, #d84d4d);
 }
 
@@ -272,12 +279,6 @@
 }
 
 /* ── Уплата взносов: точное соответствие макету (node 55321:80338) ── */
-.dest-page--contrib .dest-back {
-  background: transparent;
-  border: 1px solid var(--color-translucent-primitive-neutral-4, rgba(25, 25, 25, 0.45));
-  border-radius: 10px;
-}
-
 .dest-page--contrib .dest-rail__title {
   font-size: 24px;
   line-height: 30px;

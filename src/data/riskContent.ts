@@ -49,8 +49,8 @@ export const CATEGORIES: Record<CategoryId, CategoryDef> = {
     label: 'Налоги и взносы',
     content: {
       ok: { title: 'Всё уплачено', subtitle: 'Проблем нет' },
-      attention: { title: 'Налог по УСН за II кв.', subtitle: 'До 28 июля' },
-      overdue: { title: 'Налог по УСН за II кв.', subtitle: 'Срок вышел 28 июля' },
+      attention: { title: 'Налог по УСН за II кв.', subtitle: 'До 25 июля' },
+      overdue: { title: 'Налог по УСН за II кв.', subtitle: 'Срок вышел 25 июля' },
     },
   },
   reporting: {
