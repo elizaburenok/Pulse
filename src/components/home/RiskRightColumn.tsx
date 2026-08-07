@@ -10,7 +10,7 @@ import './RiskRightColumn.css'
 
 const WIDGET_TEXT: Record<PageStatus, { title: string; subtitle: string }> = {
   ok: { title: 'Всё в порядке', subtitle: 'В бухгалтерии всё корректно, а вы справляетесь безупречно' },
-  attention: { title: 'Обратите внимание', subtitle: 'Решите вопросы, чтобы не получить штраф' },
+  attention: { title: 'Обратите внимание', subtitle: 'Решите вопросы, чтобы не получить пени' },
   overdue: { title: 'Серьёзно рискуете', subtitle: 'Решите вопросы, чтобы избежать блокировки' },
 }
 
