@@ -131,8 +131,8 @@ export default function TaxPaymentPage() {
       )}
 
       {showResult && (
-        <FlowResultModal title="Платёж отправлен!" onDone={finishFromResult}>
-          <p>Вы уплатили 486 973 ₽ налога.</p>
+        <FlowResultModal title="Налог по УСН уплачен!" onDone={finishFromResult}>
+          <p>Отправили платёж 486 973 ₽.</p>
           <p>Налог по УСН за II квартал 2025 полностью уплачен.</p>
           <p>Информация по платежу появится в ленте событий в течение 5 минут.</p>
         </FlowResultModal>
