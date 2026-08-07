@@ -1,4 +1,4 @@
-import { Search, ChevronsLeft, FileText, Building2, Tag, Key, Camera, MoreHorizontal, Plus, SlidersHorizontal, ChevronRight, EyeOff } from 'lucide-react'
+import { Search, ChevronsLeft, FileText, Building2, Tag, Key, Camera, MoreHorizontal, Plus, SlidersHorizontal, ChevronRight, ChevronDown, EyeOff } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import RiskRightColumn from '../components/home/RiskRightColumn'
 import './HomePage.css'
@@ -20,8 +20,8 @@ const SERVICES = [
 ]
 
 const ACCOUNTS = [
-  { type: 'Расчётный', amount: '23 422 785,37 ₽', mask: '**3486', cards: 2 },
-  { type: 'Расчётный', amount: '2 374,77 ₽', mask: '**6584', cards: 4 },
+  { type: 'Расчётный', amount: '23 422 785,37 ₽', mask: '*3486' },
+  { type: 'Личный', amount: '422 785,37 ₽', mask: '*3486' },
 ]
 
 const TRANSACTIONS = [
@@ -109,69 +109,66 @@ export default function HomePage() {
 
         {/* Accounts */}
         <div className="home-section">
-          <div className="home-section__header">
-            <div className="home-tabs">
-              <button className="home-tab home-tab--active">Счета</button>
-              <button className="home-tab">Валюта</button>
-              <button className="home-tab">Фонды</button>
-              <button className="home-tab">Карты</button>
-            </div>
-            <button className="home-add-btn">
-              Добавить <Plus size={16} />
-            </button>
+          <div className="home-tabs">
+            <button className="home-tab home-tab--active">Счета</button>
+            <button className="home-tab">Валюта</button>
+            <button className="home-tab">Фонды</button>
+            <button className="home-tab">Карты</button>
           </div>
 
           <div className="home-accounts">
-            {ACCOUNTS.map((acc) => (
-              <div key={acc.mask} className="home-account-card">
+            {ACCOUNTS.map((acc, i) => (
+              <div key={i} className="home-account-card">
                 <div className="home-account-card__header">
                   <div className="home-account-card__type-row">
                     <span className="home-account-card__flag">🇷🇺</span>
-                    <span className="home-account-card__type">{acc.type}</span>
+                    <span className="home-account-card__type">{acc.type} {acc.mask}</span>
                   </div>
                   <button className="home-account-card__menu">•••</button>
                 </div>
                 <p className="home-account-card__amount">{acc.amount}</p>
-                <div className="home-account-card__footer">
-                  <span className="home-account-card__mask">{acc.mask}</span>
-                  <span className="home-account-card__cards">{acc.cards} 🪪</span>
-                </div>
               </div>
             ))}
           </div>
 
           <div className="home-accounts-total">
-            <span>Всего 7 счетов на 2 549 670,21 ₽</span>
-            <ChevronRight size={16} />
-            <button className="home-accounts-total__eye"><EyeOff size={18} /></button>
+            <button className="home-pill">
+              Всего 3 счёта на 904 275,37 ₽
+              <ChevronRight size={16} />
+            </button>
+            <button className="home-accounts-total__eye"><EyeOff size={20} /></button>
+            <button className="home-pill home-accounts-total__add">
+              Добавить продукт <Plus size={16} />
+            </button>
           </div>
         </div>
 
         {/* History */}
         <div className="home-section">
-          <div className="home-section__header">
-            <div className="home-tabs">
-              <button className="home-tab home-tab--active">История</button>
-              <button className="home-tab">
-                На подпись <span className="home-badge">2</span>
-              </button>
-              <button className="home-tab">Автоплатежи</button>
-            </div>
+          <div className="home-tabs">
+            <button className="home-tab home-tab--active">История</button>
+            <button className="home-tab">
+              На подпись <span className="home-badge">2</span>
+            </button>
+            <button className="home-tab">Автоплатежи</button>
           </div>
 
           <div className="home-history-card">
             <div className="home-filters">
-              <button className="home-filter-chip"><SlidersHorizontal size={14} /></button>
-              <button className="home-filter-chip">На подпись <span className="home-filter-chip__arrow">▾</span></button>
-              <button className="home-filter-chip">За всё время <span className="home-filter-chip__arrow">▾</span></button>
-              <button className="home-filter-chip">Счёт <span className="home-filter-chip__arrow">▾</span></button>
-              <button className="home-filter-chip">Карта <span className="home-filter-chip__arrow">▾</span></button>
-              <button className="home-filter-chip">Категория <span className="home-filter-chip__arrow">▾</span></button>
-            </div>
-
-            <div className="home-history-search">
-              <Search size={16} color="var(--color-secondary)" />
-              <input className="home-history-search__input" placeholder="Контрагент, сумма, назначение" readOnly />
+              <div className="home-filters__line">
+                <button className="home-chip home-chip--icon"><SlidersHorizontal size={18} /></button>
+                <button className="home-chip">Все операции <ChevronDown size={12} /></button>
+                <button className="home-chip">За всё время <ChevronDown size={12} /></button>
+                <button className="home-chip">Счёт <ChevronDown size={12} /></button>
+                <button className="home-chip">Карта <ChevronDown size={12} /></button>
+              </div>
+              <div className="home-filters__line">
+                <button className="home-chip">Категория <ChevronDown size={12} /></button>
+                <div className="home-chip home-chip--search">
+                  <Search size={18} color="var(--color-secondary)" />
+                  <input className="home-chip__input" placeholder="Контрагент, сумма, назначение" readOnly />
+                </div>
+              </div>
             </div>
 
             <p className="home-history-date">Сегодня, 2 апреля</p>
@@ -188,6 +185,7 @@ export default function HomePage() {
                     <p className="home-transaction__desc">{tx.description}</p>
                     <p className="home-transaction__ref">{tx.ref}</p>
                   </div>
+                  <div className="home-transaction__avatar" />
                 </div>
               ))}
             </div>

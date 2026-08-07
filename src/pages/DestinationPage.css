@@ -1,7 +1,7 @@
 .dest-page {
   flex: 1;
   position: relative;
-  background: var(--color-page-bg, #fff);
+  background: var(--color-page-secondary, #f9f9f9);
   min-height: calc(100dvh - 74px);
   padding: 32px 20px 120px;
 }
@@ -61,7 +61,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 32px;
 }
 
 .dest-amount {
@@ -69,7 +69,6 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  margin-bottom: 12px;
 }
 
 .dest-amount__value {
@@ -85,12 +84,14 @@
 }
 
 .dest-chip {
+  align-self: flex-start;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 14px;
+  height: 40px;
+  padding: 0 12px;
   border-radius: 10px;
-  background: var(--color-bg-brand-2, #e2ddf6);
+  background: var(--color-container-transparent-1, rgba(25, 25, 25, 0.05));
   font-family: var(--font-ttn);
   font-size: 14px;
   font-weight: 500;
@@ -107,10 +108,10 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 20px 24px;
+  padding: 32px 20px;
   border-radius: 16px;
   background: var(--color-bg-default, #fff);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 7.5px rgba(0, 0, 0, 0.05);
   text-align: left;
   transition: box-shadow 0.15s;
 }
@@ -123,18 +124,71 @@
 .dest-account__text {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+}
+
+.dest-tile__text {
+  gap: 10px;
+}
+
+.dest-account__text {
+  gap: 8px;
 }
 
 .dest-tile__title {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
   color: var(--color-primitive-primary, #191919);
 }
 
 .dest-tile__desc {
   font-size: 14px;
+  line-height: 18px;
   color: var(--color-primitive-secondary, #676767);
+}
+
+.dest-desc {
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-primitive-primary, #191919);
+}
+
+.dest-navigators {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dest-context {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border-default, rgba(25, 25, 25, 0.2));
+  border-radius: 18px;
+  padding: 5px 0 20px;
+}
+
+.dest-context__cell {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 15px 20px 0;
+  color: var(--color-primitive-primary, #191919);
+}
+
+.dest-context__cell p {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.dest-context__label {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.dest-context__value {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 26px;
 }
 
 .dest-account {
@@ -142,21 +196,23 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 16px 24px;
-  border-radius: 16px;
-  background: var(--color-bg-neutral-1, #f4f4f4);
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: var(--color-container-transparent-1, rgba(25, 25, 25, 0.05));
   text-align: left;
-  margin-top: 4px;
 }
 
 .dest-account__label {
-  font-size: 13px;
-  color: var(--color-primitive-secondary, #676767);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--color-primitive-primary, #191919);
 }
 
 .dest-account__value {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 400;
+  line-height: 20px;
   color: var(--color-primitive-primary, #191919);
 }
 
@@ -182,7 +238,7 @@
 }
 
 .dest-btn--secondary {
-  background: var(--color-bg-neutral-1, #f4f4f4);
+  background: #eee;
   color: var(--color-primitive-primary, #191919);
 }
 
@@ -210,35 +266,117 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-/* ── ЕНП: широкая раскладка с правой колонкой ── */
-.dest-main--ens {
-  max-width: 620px;
-  margin: 0 auto 0 260px;
-  align-items: stretch;
+/* ── Уплата взносов: точное соответствие макету (node 55321:80338) ── */
+.dest-page--contrib .dest-back {
+  background: transparent;
+  border: 1px solid var(--color-translucent-primitive-neutral-4, rgba(25, 25, 25, 0.45));
+  border-radius: 10px;
 }
 
-.ens-title {
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 32px;
-  color: var(--color-primitive-primary, #191919);
+.dest-page--contrib .dest-rail__title {
+  font-size: 24px;
+  line-height: 30px;
 }
 
-.ens-sub {
-  font-size: 15px;
-  color: var(--color-primitive-secondary, #676767);
-  margin-top: 6px;
+.dest-page--contrib .dest-rail__sub {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
 }
 
-.ens-group {
+.dest-page--contrib .dest-amount {
+  gap: 6px;
+}
+
+.dest-page--contrib .dest-amount__value {
+  font-size: 42px;
+  line-height: 48px;
+}
+
+.dest-account__accessory {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.dest-flag {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: linear-gradient(
+    to bottom,
+    #fafafa 0 33.33%,
+    #003bde 33.33% 66.67%,
+    #ff4949 66.67% 100%
+  );
+}
+
+.dest-page--contrib .dest-btn {
+  width: 335px;
+  min-width: 0;
+  height: 50px;
+  border-radius: 10px;
   font-size: 18px;
-  font-weight: 600;
-  color: var(--color-primitive-primary, #191919);
-  margin-top: 28px;
-  margin-bottom: 8px;
 }
 
-.ens-list {
+/* ══ Страница уведомления по ЕНП ══ */
+
+/* Фон страницы — Page/primary (белый), а не серый.
+   Резервируем боковые полосы под рейл (слева) и виджеты (справа),
+   чтобы центральная колонка не налезала на них. */
+.dest-page--ens {
+  background: var(--color-page-bg, #fff);
+  padding-left: 240px;
+  padding-right: 340px;
+}
+
+/* Центральная колонка контента (720px по макету, контент 680px) */
+.ens-content {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* XL */
+}
+
+.ens-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ens-header__title {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 40px;
+  color: var(--color-primitive-primary, #191919);
+}
+
+.ens-header__sub {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.14px;
+  color: var(--color-primitive-secondary, #676767);
+}
+
+.ens-block {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* S */
+}
+
+.ens-block__title {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+  color: var(--color-primitive-primary, #191919);
+}
+
+/* Список шагов — ячейки Cell без разделителей */
+.ens-steps {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -246,137 +384,177 @@
   flex-direction: column;
 }
 
-.ens-item {
+.ens-step {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 12px 0;
+  padding: 10px 0;
 }
 
-.ens-item__num {
-  width: 24px;
-  height: 24px;
+.ens-step__num {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  border: 1px solid var(--color-primitive-neutral-2, #d4d4d4);
+  border: 1.5px solid var(--color-primitive-neutral-3, #c8c8c8);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
+  line-height: 1;
   color: var(--color-primitive-secondary, #676767);
-  flex-shrink: 0;
 }
 
-.ens-item__text {
+.ens-step__text {
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
-  flex: 1;
-  min-width: 0;
 }
 
-.ens-item__title {
+.ens-step__title {
   font-size: 16px;
   font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.16px;
   color: var(--color-primitive-primary, #191919);
 }
 
-.ens-item__desc {
+.ens-step__desc {
   font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.14px;
   color: var(--color-primitive-secondary, #676767);
 }
 
-/* Правая колонка ЕНП */
-.ens-side {
+.ens-step > svg {
+  flex-shrink: 0;
+}
+
+.ens-step__icon {
+  color: var(--color-primitive-brand, #835de1);
+}
+
+/* Правая колонка виджетов — как на главной интернет-банка (бордер-карточки) */
+.ens-widgets {
   position: absolute;
-  top: 88px;
+  top: 32px;
   right: 20px;
   width: 300px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 15px;
 }
 
-.ens-side-card {
+.ens-widget {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 20px;
+  border: 1px solid rgba(25, 25, 25, 0.15);
   border-radius: 16px;
-  background: var(--color-bg-default, #fff);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  text-align: left;
-  width: 100%;
+  overflow: hidden;
 }
 
-.ens-side-card__head {
+.ens-widget__head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  font-size: 16px;
+  gap: 4px;
+  padding: 20px 20px 10px;
+  text-align: left;
+}
+
+.ens-widget__head-title {
+  font-size: 20px;
   font-weight: 600;
+  line-height: 26px;
   color: var(--color-primitive-primary, #191919);
 }
 
-.ens-side-card__row {
+.ens-widget__body {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+
+.ens-widget__cell {
   display: flex;
   align-items: center;
   gap: 12px;
+  padding: 8px 20px;
 }
 
-.ens-side-card__logo {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: var(--color-bg-brand-2, #e2ddf6);
+.ens-widget__icon {
+  width: 40px;
+  height: 40px;
   flex-shrink: 0;
+  object-fit: contain;
 }
 
-.ens-side-card__text {
+.ens-widget__doc-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.ens-widget__cell-text {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.ens-side-card__title {
-  font-size: 14px;
+.ens-widget__cell-title {
+  font-size: 16px;
   font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.16px;
   color: var(--color-primitive-primary, #191919);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.ens-side-card__desc {
-  font-size: 13px;
+.ens-widget__cell-desc {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.14px;
   color: var(--color-primitive-secondary, #676767);
 }
 
-.ens-side-card__doc {
+.ens-instruction {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 15px;
-  color: var(--color-primitive-primary, #191919);
-}
-
-.ens-help {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  gap: 14px;
+  padding: 4px 4px 4px 0;
   text-align: left;
+  transition: opacity 0.15s;
 }
 
-.ens-help__text {
+.ens-instruction:hover {
+  opacity: 0.7;
+}
+
+.ens-instruction__text {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.ens-help__title {
-  font-size: 15px;
-  font-weight: 500;
+.ens-instruction__title {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
   color: var(--color-primitive-primary, #191919);
 }
 
-.ens-help__desc {
-  font-size: 13px;
+.ens-instruction__desc {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.14px;
   color: var(--color-primitive-secondary, #676767);
 }

@@ -1,4 +1,4 @@
-import { X, ChevronRight } from 'lucide-react'
+import { X } from 'lucide-react'
 import type { Task, TaskIcon } from '../../data/riskContent'
 import taxesIcon from '../../logo/Taxes.png'
 import contributionsIcon from '../../logo/Contributions.png'
@@ -49,7 +49,6 @@ export default function TasksDrawer({ open, title, tasks, onClose, onSelect }: P
                   <span className="drawer__item-title">{task.title}</span>
                   <span className="drawer__item-due">до {task.date}</span>
                 </span>
-                <ChevronRight size={20} color="var(--color-primitive-neutral-3, #c8c8c8)" />
               </button>
             </li>
           ))}

@@ -3,6 +3,7 @@ import RootLayout from './layouts/RootLayout'
 import HomePage from './pages/HomePage'
 import RisksPage from './pages/RisksPage'
 import TaxPaymentPage from './pages/TaxPaymentPage'
+import ContributionsPaymentPage from './pages/ContributionsPaymentPage'
 import EnsNotificationPage from './pages/EnsNotificationPage'
 
 export const router = createBrowserRouter([
@@ -13,6 +14,7 @@ export const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: 'risks', element: <RisksPage /> },
       { path: 'risks/tax', element: <TaxPaymentPage /> },
+      { path: 'risks/contributions', element: <ContributionsPaymentPage /> },
       { path: 'risks/ens', element: <EnsNotificationPage /> },
     ],
   },

@@ -6,7 +6,7 @@ export type Severity = 'ok' | 'attention' | 'overdue'
 export type CategoryId = 'taxes' | 'reporting' | 'operations' | 'limit' | 'patent'
 
 /** Куда ведёт задача при выполнении. null — заглушка/тост. */
-export type TaskTarget = 'tax' | 'ens' | null
+export type TaskTarget = 'tax' | 'contributions' | 'ens' | null
 
 /** Логотип задачи в дровере — из src/logo. Без иконки — нейтральный кружок. */
 export type TaskIcon = 'taxes' | 'contributions'
@@ -36,8 +36,8 @@ export interface CategoryDef {
 
 /** Канонический порядок категорий (как в базовом макете). */
 export const CATEGORY_ORDER: CategoryId[] = [
-  'taxes',
   'reporting',
+  'taxes',
   'operations',
   'limit',
   'patent',
@@ -103,7 +103,10 @@ function pluralPayments(n: number): string {
 /**
  * Контент карточки категории. Если рисковых задач больше одной, карточка не
  * называет конкретную задачу — показывает их число и ближайший срок
- * (node 40000964-61010), иначе — статический текст из CATEGORIES.
+ * (node 40000964-61010). Если задача ровно одна — карточка называет именно
+ * её (не статический текст категории: он может описывать уже закрытую
+ * задачу, например налог, когда осталась только задача по взносам).
+ * Иначе (задач нет) — статический текст из CATEGORIES.
  */
 export function cardContent(category: CategoryDef, severity: Severity, tasks: Task[]): CardContent {
   if (severity !== 'ok' && tasks.length > 1) {
@@ -111,6 +114,13 @@ export function cardContent(category: CategoryDef, severity: Severity, tasks: Ta
     return {
       title: pluralPayments(tasks.length),
       subtitle: severity === 'overdue' ? `Срок вышел ${nearest.date}` : `До ${nearest.date}`,
+    }
+  }
+  if (severity !== 'ok' && tasks.length === 1) {
+    const task = tasks[0]
+    return {
+      title: task.title,
+      subtitle: severity === 'overdue' ? `Срок вышел ${task.date}` : `До ${task.date}`,
     }
   }
   return category.content[severity]
@@ -127,8 +137,8 @@ export type PageStatus = 'ok' | 'attention' | 'overdue'
 
 const STATUS_TITLE: Record<PageStatus, string> = {
   ok: 'Всё в порядке',
-  attention: 'Требует внимания',
-  overdue: 'Есть проблемы',
+  attention: 'Обратите внимание',
+  overdue: 'Серьёзно рискуете',
 }
 
 /** Подзаголовок под конкретный активный риск (attention / overdue). */
@@ -157,9 +167,9 @@ const CATEGORY_SUBTITLE: Record<CategoryId, Record<'attention' | 'overdue', stri
 }
 
 const OK_SUBTITLE =
-  'Все расчёты верны, отчётность на месте. Спокойно занимайтесь своими делами, всё под контролем.'
-const MULTI_ATTENTION = 'Проверьте начисления и сроки, чтобы не получить штраф'
-const MULTI_OVERDUE = 'Решите вопросы, чтобы вернуть хороший пульс и избежать блокировки'
+  'Налоги уплачены, отчётность сдана. Чувствуете? Даже дышится свободнее.'
+const MULTI_ATTENTION = 'Есть вопросы в нескольких разделах — решите их, чтобы не получить пени'
+const MULTI_OVERDUE = 'Несколько вопросов требуют срочного решения — иначе счёт заблокируют'
 
 export interface HeaderText {
   status: PageStatus

@@ -28,7 +28,7 @@ const taxTasks: Task[] = [
     id: 'contributions-2026',
     title: 'Взносы с доходов за 2026',
     date: '28 июля',
-    target: 'tax',
+    target: 'contributions',
     icon: 'contributions',
   },
 ]

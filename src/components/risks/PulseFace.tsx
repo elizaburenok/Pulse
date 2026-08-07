@@ -23,7 +23,7 @@ export default function PulseFace({ status, size = 64 }: Props) {
       height={size}
       alt=""
       aria-hidden="true"
-      style={{ display: 'block', borderRadius: '50%' }}
+      style={{ display: 'block' }}
     />
   )
 }

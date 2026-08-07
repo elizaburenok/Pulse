@@ -35,3 +35,15 @@
 .state-toggle__btn--on:hover {
   background: var(--color-primitive-primary, #191919);
 }
+
+.state-toggle__divider {
+  width: 1px;
+  margin: 4px 2px;
+  background: var(--color-bg-neutral-1, #f4f4f4);
+}
+
+.state-toggle__btn--reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}

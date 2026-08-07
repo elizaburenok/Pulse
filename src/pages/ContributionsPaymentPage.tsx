@@ -6,26 +6,7 @@ import ConfirmActionSheet from '../components/risks/ConfirmActionSheet'
 import FlowResultModal from '../components/risks/FlowResultModal'
 import './DestinationPage.css'
 
-/** Иконка «Расчёт налогов» — плюс-минус (Stroked 2px/Plus Minus из TUI Universal). */
-function PlusMinusIcon({ size = 24 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 20 19.5"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ flexShrink: 0, color: 'var(--color-primitive-secondary)' }}
-    >
-      <path
-        d="M17.793 0.792969C18.1835 0.40246 18.8165 0.402491 19.207 0.792969C19.5976 1.18349 19.5976 1.81651 19.207 2.20703L2.20703 19.207C1.8165 19.5975 1.18348 19.5975 0.792969 19.207C0.402507 18.8165 0.402508 18.1835 0.792969 17.793L17.793 0.792969ZM19 15C19.5523 15 20 15.4477 20 16C20 16.5523 19.5523 17 19 17H13C12.4477 17 12 16.5523 12 16C12 15.4477 12.4477 15 13 15H19ZM4 0C4.55228 0 5 0.447715 5 1V3H7C7.55228 3 8 3.44772 8 4C8 4.55228 7.55228 5 7 5H5V7C5 7.55228 4.55228 8 4 8C3.44772 8 3 7.55228 3 7V5H1C0.447715 5 0 4.55228 0 4C0 3.44772 0.447715 3 1 3H3V1C3 0.447715 3.44772 0 4 0Z"
-        fill="currentColor"
-      />
-    </svg>
-  )
-}
-
-export default function TaxPaymentPage() {
+export default function ContributionsPaymentPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const { closeTask } = useRiskState()
@@ -59,21 +40,21 @@ export default function TaxPaymentPage() {
   }
 
   return (
-    <div className="dest-page">
+    <div className="dest-page dest-page--contrib">
       <button className="dest-back" onClick={goBack} aria-label="Назад">
         <ArrowLeft size={20} />
       </button>
 
       <aside className="dest-rail">
         <p className="dest-rail__crumb">Онлайн-бухгалтерия ›</p>
-        <h1 className="dest-rail__title">Налог по УСН</h1>
-        <p className="dest-rail__sub">II квартал 2025</p>
+        <h1 className="dest-rail__title">Фиксированные взносы</h1>
+        <p className="dest-rail__sub">За 2025</p>
       </aside>
 
       <main className="dest-main">
         <div className="dest-amount">
-          <p className="dest-amount__value">486 973 ₽</p>
-          <p className="dest-amount__due">до 28 июля</p>
+          <p className="dest-amount__value">25 369 ₽</p>
+          <p className="dest-amount__due">до 28 декабря</p>
         </div>
 
         <button className="dest-chip" onClick={() => setToast('Изменение суммы недоступно в прототипе')}>
@@ -81,14 +62,26 @@ export default function TaxPaymentPage() {
           Изменить сумму
         </button>
 
+        <p className="dest-desc">
+          Взносы можно уплачивать любыми частями: так вы равномерно распределите финансовую нагрузку в
+          течение года. Срок уплаты больше не влияет на уменьшение налога по УСН. По желанию вы можете
+          отредактировать сумму платежа.
+        </p>
+
         <div className="dest-navigators">
-          <button className="dest-tile" onClick={() => setToast('Расчёт налогов')}>
-            <span className="dest-tile__text">
-              <span className="dest-tile__title">Расчёт налогов</span>
-              <span className="dest-tile__desc">Почему такая сумма?</span>
-            </span>
-            <PlusMinusIcon size={24} />
-          </button>
+          <div className="dest-context">
+            <div className="dest-context__cell">
+              <p>
+                По закону каждый предприниматель должен уплатить в этом году фиксированные взносы в
+                Социальный фонд, даже если не было доходов. Вы стали ИП не с начала года, поэтому сумма
+                взносов будет меньше.
+              </p>
+            </div>
+            <div className="dest-context__cell">
+              <span className="dest-context__label">Общая сумма взносов</span>
+              <span className="dest-context__value">25 369 ₽</span>
+            </div>
+          </div>
 
           <button className="dest-tile" onClick={() => setToast('Реквизиты скопированы')}>
             <span className="dest-tile__text">
@@ -102,7 +95,7 @@ export default function TaxPaymentPage() {
         <button className="dest-account" onClick={() => setToast('Выбор счёта')}>
           <span className="dest-account__text">
             <span className="dest-account__label">Со счёта</span>
-            <span className="dest-account__value">5 250 275,37 ₽ — Расчётный, **9804</span>
+            <span className="dest-account__value">5 250 275,37 ₽ — Расчётный, **9030</span>
           </span>
           <span className="dest-account__accessory">
             <span className="dest-flag" aria-hidden="true" />
@@ -122,7 +115,7 @@ export default function TaxPaymentPage() {
 
       {showConfirm && (
         <ConfirmActionSheet
-          title="Уплатить 486 973 ₽?"
+          title="Уплатить 25 369 ₽?"
           actionLabel="Подписать и уплатить"
           onConfirm={confirmPayment}
           onCancel={() => setShowConfirm(false)}
@@ -131,8 +124,7 @@ export default function TaxPaymentPage() {
 
       {showResult && (
         <FlowResultModal title="Платёж отправлен!" onDone={finishFromResult}>
-          <p>Вы уплатили 486 973 ₽ налога.</p>
-          <p>Налог по УСН за II квартал 2025 полностью уплачен.</p>
+          <p>Вы уплатили 25 369 ₽ взносов.</p>
           <p>Информация по платежу появится в ленте событий в течение 5 минут.</p>
         </FlowResultModal>
       )}
