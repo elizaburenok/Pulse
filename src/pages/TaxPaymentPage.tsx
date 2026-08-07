@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ArrowLeft, Pencil, ClipboardList, ChevronDown } from 'lucide-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useRiskState } from '../context/RiskStateContext'
+import { dueLabel } from '../data/riskContent'
 import ConfirmActionSheet from '../components/risks/ConfirmActionSheet'
 import FlowResultModal from '../components/risks/FlowResultModal'
 import './DestinationPage.css'
@@ -28,7 +29,8 @@ function PlusMinusIcon({ size = 24 }: { size?: number }) {
 export default function TaxPaymentPage() {
   const navigate = useNavigate()
   const location = useLocation()
-  const { closeTask } = useRiskState()
+  const { closeTask, levels } = useRiskState()
+  const overdue = levels.taxes === 'overdue'
   const [toast, setToast] = useState<string | null>(null)
   const [showConfirm, setShowConfirm] = useState(false)
   const [showResult, setShowResult] = useState(false)
@@ -73,7 +75,9 @@ export default function TaxPaymentPage() {
       <main className="dest-main">
         <div className="dest-amount">
           <p className="dest-amount__value">486 973 ₽</p>
-          <p className="dest-amount__due">до 28 июля</p>
+          <p className={`dest-amount__due${overdue ? ' dest-amount__due--overdue' : ''}`}>
+            {dueLabel(levels.taxes, '28 июля')}
+          </p>
         </div>
 
         <button className="dest-chip" onClick={() => setToast('Изменение суммы недоступно в прототипе')}>

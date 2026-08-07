@@ -83,6 +83,11 @@
   color: var(--color-primitive-secondary, #676767);
 }
 
+/* Просрочка — «Срок вышел …» красным. */
+.dest-amount__due--overdue {
+  color: var(--color-primitive-error, #d84d4d);
+}
+
 .dest-chip {
   align-self: flex-start;
   display: inline-flex;

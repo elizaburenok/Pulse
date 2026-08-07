@@ -125,6 +125,7 @@ export default function RisksPage() {
         open={!!drawer}
         title={drawer?.title ?? ''}
         tasks={drawer?.tasks ?? []}
+        severity={drawerId ? levels[drawerId] : 'ok'}
         onClose={() => setDrawerId(null)}
         onSelect={(task) => {
           openTask(task.target, task.id, drawerId ?? undefined)

@@ -1,5 +1,5 @@
 import { X } from 'lucide-react'
-import type { Task, TaskIcon } from '../../data/riskContent'
+import { dueLabel, type Severity, type Task, type TaskIcon } from '../../data/riskContent'
 import taxesIcon from '../../logo/Taxes.png'
 import contributionsIcon from '../../logo/Contributions.png'
 import './TasksDrawer.css'
@@ -8,6 +8,8 @@ interface Props {
   open: boolean
   title: string
   tasks: Task[]
+  /** Уровень категории — определяет подпись срока и её цвет. */
+  severity: Severity
   onClose: () => void
   onSelect: (task: Task) => void
 }
@@ -18,7 +20,7 @@ const ICON: Record<TaskIcon, string> = {
 }
 
 /** Дровер со списком задач категории (когда задач больше одной). */
-export default function TasksDrawer({ open, title, tasks, onClose, onSelect }: Props) {
+export default function TasksDrawer({ open, title, tasks, severity, onClose, onSelect }: Props) {
   if (!open) return null
 
   return (
@@ -47,7 +49,13 @@ export default function TasksDrawer({ open, title, tasks, onClose, onSelect }: P
                 )}
                 <span className="drawer__item-text">
                   <span className="drawer__item-title">{task.title}</span>
-                  <span className="drawer__item-due">до {task.date}</span>
+                  <span
+                    className={`drawer__item-due${
+                      severity === 'overdue' ? ' drawer__item-due--overdue' : ''
+                    }`}
+                  >
+                    {dueLabel(severity, task.date)}
+                  </span>
                 </span>
               </button>
             </li>
