@@ -109,9 +109,16 @@
   color: var(--color-primitive-primary, #191919);
 }
 
+/* TTN 500/S (Medium 14/18, tracking 0.14px) */
 .drawer__item-due {
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 18px;
+  letter-spacing: 0.14px;
   color: var(--color-primitive-secondary, #676767);
+}
+
+/* Просрочка — «Срок вышел …» красным. */
+.drawer__item-due--overdue {
+  color: var(--color-primitive-error, #d84d4d);
 }

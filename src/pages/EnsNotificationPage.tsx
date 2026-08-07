@@ -18,7 +18,8 @@ const CHECK_ITEMS = [
 export default function EnsNotificationPage() {
   const navigate = useNavigate()
   const location = useLocation()
-  const { closeTask } = useRiskState()
+  const { closeTask, levels } = useRiskState()
+  const overdue = levels.reporting === 'overdue'
   const [toast, setToast] = useState<string | null>(null)
   const [showResult, setShowResult] = useState(false)
   const navState = location.state as { reopenDrawerId?: string; taskId?: string } | null
@@ -55,7 +56,11 @@ export default function EnsNotificationPage() {
 
       <main className="ens-content">
         <header className="ens-header">
-          <h2 className="ens-header__title">Проверьте и отправьте уведомление до 25 июля</h2>
+          <h2 className="ens-header__title">
+            {overdue
+              ? 'Проверьте и отправьте уведомление, как можно скорее'
+              : 'Проверьте и отправьте уведомление до 25 июля'}
+          </h2>
           <p className="ens-header__sub">Тогда налоговая верно учтёт ваши налоги и страховые взносы</p>
         </header>
 

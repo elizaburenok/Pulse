@@ -126,6 +126,14 @@ export function cardContent(category: CategoryDef, severity: Severity, tasks: Ta
   return category.content[severity]
 }
 
+/**
+ * Подпись срока задачи для дроверов и страниц действий: «до 25 июля», а при
+ * просрочке (overdue) — «Срок вышел 25 июля». Цвет (красный) задаётся в CSS.
+ */
+export function dueLabel(severity: Severity, date: string): string {
+  return severity === 'overdue' ? `Срок вышел ${date}` : `до ${date}`
+}
+
 /** Категории, для которых есть справочный материал → показываем «Изучить». */
 export const LEARN_MORE: Partial<Record<CategoryId, string>> = {
   limit: 'Условия перехода на НДС',

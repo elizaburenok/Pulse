@@ -68,8 +68,7 @@ export const SCENARIOS: Record<ScenarioId, Scenario> = {
       taxes: { level: 'overdue', tasks: taxTasks },
       reporting: { level: 'overdue', tasks: reportingTask },
       operations: ok(),
-      // жёлтый лимит для наглядности смешанной сетки (кадр 40000797-19242)
-      limit: { level: 'attention', tasks: [] },
+      limit: ok(),
       patent: ok(),
     },
   },
