@@ -124,7 +124,7 @@ export default function ContributionsPaymentPage() {
       )}
 
       {showResult && (
-        <FlowResultModal title="Платёж отправлен!" onDone={finishFromResult}>
+        <FlowResultModal title="Фиксированные взносы уплачены!" onDone={finishFromResult}>
           <p>Вы уплатили 25 369 ₽ взносов.</p>
           <p>Информация по платежу появится в ленте событий в течение 5 минут.</p>
         </FlowResultModal>
