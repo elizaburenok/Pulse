@@ -18,6 +18,8 @@ export interface Task {
   date: string
   target: TaskTarget
   icon?: TaskIcon
+  /** Сумма к уплате, напр. «28 712 ₽». Есть не у всех задач (уведомления — без суммы). */
+  amount?: string
 }
 
 export interface CardContent {
@@ -68,7 +70,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDef> = {
     content: {
       ok: { title: 'Всё учтено', subtitle: 'Проблем нет' },
       attention: { title: 'Платёж по ЕНС', subtitle: 'Уточните' },
-      overdue: { title: 'Платёж по ЕНС', subtitle: 'Уточните' },
+      overdue: { title: 'Ozon', subtitle: 'Подключите для точных расчётов' },
     },
   },
   limit: {
@@ -127,11 +129,11 @@ export function cardContent(category: CategoryDef, severity: Severity, tasks: Ta
 }
 
 /**
- * Подпись срока задачи для дроверов и страниц действий: «до 25 июля», а при
+ * Подпись срока задачи для дроверов и страниц действий: «До 25 июля», а при
  * просрочке (overdue) — «Срок вышел 25 июля». Цвет (красный) задаётся в CSS.
  */
 export function dueLabel(severity: Severity, date: string): string {
-  return severity === 'overdue' ? `Срок вышел ${date}` : `до ${date}`
+  return severity === 'overdue' ? `Срок вышел ${date}` : `До ${date}`
 }
 
 /** Категории, для которых есть справочный материал → показываем «Изучить». */

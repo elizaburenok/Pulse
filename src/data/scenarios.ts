@@ -23,13 +23,21 @@ const ok = (): ScenarioCategory => ({ level: 'ok', tasks: [] })
 
 /** Две задачи по налогам → открывают дровер. */
 const taxTasks: Task[] = [
-  { id: 'usn-q2', title: 'Налог по УСН за II кв. 2025', date: '25 июля', target: 'tax', icon: 'taxes' },
+  {
+    id: 'usn-q2',
+    title: 'Налог по УСН за II кв. 2026',
+    date: '25 июля',
+    target: 'tax',
+    icon: 'taxes',
+    amount: '486 973 ₽',
+  },
   {
     id: 'contributions-2026',
     title: 'Взносы с доходов за 2026',
     date: '28 июля',
     target: 'contributions',
     icon: 'contributions',
+    amount: '25 369 ₽',
   },
 ]
 
@@ -41,7 +49,7 @@ const reportingTask: Task[] = [
 export const SCENARIOS: Record<ScenarioId, Scenario> = {
   ok: {
     id: 'ok',
-    label: 'Всё хорошо',
+    label: 'Кейс 1',
     levels: {
       taxes: ok(),
       reporting: ok(),
@@ -52,7 +60,7 @@ export const SCENARIOS: Record<ScenarioId, Scenario> = {
   },
   risk: {
     id: 'risk',
-    label: 'Есть риск',
+    label: 'Кейс 2',
     levels: {
       taxes: { level: 'attention', tasks: taxTasks },
       reporting: { level: 'attention', tasks: reportingTask },
@@ -63,11 +71,11 @@ export const SCENARIOS: Record<ScenarioId, Scenario> = {
   },
   threat: {
     id: 'threat',
-    label: 'Угроза блокировки',
+    label: 'Кейс 3',
     levels: {
-      taxes: { level: 'overdue', tasks: taxTasks },
+      taxes: { level: 'attention', tasks: taxTasks },
       reporting: { level: 'overdue', tasks: reportingTask },
-      operations: ok(),
+      operations: { level: 'overdue', tasks: [] },
       limit: ok(),
       patent: ok(),
     },

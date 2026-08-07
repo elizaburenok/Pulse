@@ -1,5 +1,6 @@
 import { Search, ChevronsLeft, FileText, Building2, Tag, Key, Camera, MoreHorizontal, Plus, SlidersHorizontal, ChevronRight, ChevronDown, EyeOff } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import { useRiskState } from '../context/RiskStateContext'
 import RiskRightColumn from '../components/home/RiskRightColumn'
 import './HomePage.css'
 
@@ -43,6 +44,13 @@ const TRANSACTIONS = [
 
 export default function HomePage() {
   const navigate = useNavigate()
+  const { setEntryPath } = useRiskState()
+
+  // Вход во флоу рисков из интернет-банка — «Назад» вернёт на главную.
+  function openRisks() {
+    setEntryPath('/')
+    navigate('/risks')
+  }
 
   return (
     <div className="home-page">
@@ -99,7 +107,7 @@ export default function HomePage() {
         </div>
 
         {/* Напоминание об уплате налога — ведёт в раздел рисков */}
-        <button className="home-mp-banner" onClick={() => navigate('/risks')}>
+        <button className="home-mp-banner" onClick={openRisks}>
           <div className="home-mp-banner__text">
             <p className="home-mp-banner__title">Уплатите налог по УСН за I квартал</p>
             <p className="home-mp-banner__subtitle">до 28 апреля вам нужно уплатить 1 469 ₽</p>

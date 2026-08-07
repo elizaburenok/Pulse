@@ -35,9 +35,15 @@ const TASKS = [
 /** Правая колонка главной: виджет «Пульс бухгалтерии» (вход в раздел рисков). */
 export default function RiskRightColumn() {
   const navigate = useNavigate()
-  const { levels } = useRiskState()
+  const { levels, setEntryPath } = useRiskState()
   const status = aggregateStatus(levels)
   const text = WIDGET_TEXT[status]
+
+  // Вход во флоу рисков из виджета интернет-банка — «Назад» вернёт на главную.
+  function openRisks() {
+    setEntryPath('/')
+    navigate('/risks')
+  }
 
   return (
     <aside className="right-col">
@@ -49,7 +55,7 @@ export default function RiskRightColumn() {
 
       <button
         className="pulse-widget"
-        onClick={() => navigate('/risks')}
+        onClick={openRisks}
         aria-label="Открыть Пульс бухгалтерии"
       >
         <div className="pulse-widget__head">
