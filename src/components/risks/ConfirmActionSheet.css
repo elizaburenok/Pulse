@@ -1,0 +1,84 @@
+.confirm-sheet-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(25, 25, 25, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: confirm-sheet-fade 0.15s ease;
+}
+
+@keyframes confirm-sheet-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.confirm-sheet {
+  width: 375px;
+  max-width: 100%;
+  background: var(--color-white-fixed, #fff);
+  border-radius: 18px;
+  overflow: hidden;
+  animation: confirm-sheet-pop 0.2s ease;
+}
+
+@keyframes confirm-sheet-pop {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.confirm-sheet__header {
+  padding: 32px 20px 16px;
+}
+
+.confirm-sheet__title {
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.16px;
+  color: var(--color-primary, #191919);
+}
+
+.confirm-sheet__action {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 16px 20px;
+  text-align: left;
+  transition: opacity 0.15s;
+}
+
+.confirm-sheet__action:hover {
+  opacity: 0.75;
+}
+
+.confirm-sheet__action-label {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  color: var(--color-brand, #835de1);
+}
+
+.confirm-sheet__footer {
+  border-top: 1px solid rgba(25, 25, 25, 0.2);
+  padding: 24px 20px;
+}
+
+.confirm-sheet__cancel {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  color: var(--color-primitive-secondary, #676767);
+}

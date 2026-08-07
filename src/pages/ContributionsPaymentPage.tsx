@@ -1,21 +1,42 @@
 import { useState } from 'react'
 import { ArrowLeft, Pencil, ClipboardList, ChevronDown } from 'lucide-react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useRiskState } from '../context/RiskStateContext'
+import ConfirmActionSheet from '../components/risks/ConfirmActionSheet'
+import FlowResultModal from '../components/risks/FlowResultModal'
 import './DestinationPage.css'
 
 export default function ContributionsPaymentPage() {
   const navigate = useNavigate()
   const location = useLocation()
+  const { closeTask } = useRiskState()
   const [toast, setToast] = useState<string | null>(null)
-  const backState = location.state ?? undefined
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [showResult, setShowResult] = useState(false)
+  const navState = location.state as { reopenDrawerId?: string; taskId?: string } | null
+  const backState = navState?.reopenDrawerId ? { reopenDrawerId: navState.reopenDrawerId } : undefined
 
   function goBack() {
     navigate('/risks', { state: backState })
   }
 
+  // Задача выполнена — закрываем её (исчезнет из списка) и возвращаемся.
   function done(msg: string) {
     setToast(msg)
+    if (navState?.taskId) closeTask(navState.taskId)
     window.setTimeout(() => navigate('/risks', { state: backState }), 900)
+  }
+
+  // Подтвердили действие в Action Sheet — отправляем платёж и показываем результат флоу.
+  function confirmPayment() {
+    setShowConfirm(false)
+    setShowResult(true)
+  }
+
+  // «Готово» в результате флоу: закрываем задачу и возвращаемся к рискам.
+  function finishFromResult() {
+    if (navState?.taskId) closeTask(navState.taskId)
+    navigate('/risks', { state: backState })
   }
 
   return (
@@ -47,27 +68,29 @@ export default function ContributionsPaymentPage() {
           отредактировать сумму платежа.
         </p>
 
-        <div className="dest-context">
-          <div className="dest-context__cell">
-            <p>
-              По закону каждый предприниматель должен уплатить в этом году фиксированные взносы в
-              Социальный фонд, даже если не было доходов. Вы стали ИП не с начала года, поэтому сумма
-              взносов будет меньше.
-            </p>
+        <div className="dest-navigators">
+          <div className="dest-context">
+            <div className="dest-context__cell">
+              <p>
+                По закону каждый предприниматель должен уплатить в этом году фиксированные взносы в
+                Социальный фонд, даже если не было доходов. Вы стали ИП не с начала года, поэтому сумма
+                взносов будет меньше.
+              </p>
+            </div>
+            <div className="dest-context__cell">
+              <span className="dest-context__label">Общая сумма взносов</span>
+              <span className="dest-context__value">25 369 ₽</span>
+            </div>
           </div>
-          <div className="dest-context__cell">
-            <span className="dest-context__label">Общая сумма взносов</span>
-            <span className="dest-context__value">25 369 ₽</span>
-          </div>
-        </div>
 
-        <button className="dest-tile" onClick={() => setToast('Реквизиты скопированы')}>
-          <span className="dest-tile__text">
-            <span className="dest-tile__title">Реквизиты получателя</span>
-            <span className="dest-tile__desc">Единый налоговый счёт</span>
-          </span>
-          <ClipboardList size={22} color="var(--color-primitive-secondary)" />
-        </button>
+          <button className="dest-tile" onClick={() => setToast('Реквизиты скопированы')}>
+            <span className="dest-tile__text">
+              <span className="dest-tile__title">Реквизиты получателя</span>
+              <span className="dest-tile__desc">Единый налоговый счёт</span>
+            </span>
+            <ClipboardList size={22} color="var(--color-primitive-secondary)" />
+          </button>
+        </div>
 
         <button className="dest-account" onClick={() => setToast('Выбор счёта')}>
           <span className="dest-account__text">
@@ -85,10 +108,26 @@ export default function ContributionsPaymentPage() {
         <button className="dest-btn dest-btn--secondary" onClick={() => done('Отмечено как уплачено')}>
           Уже уплачено
         </button>
-        <button className="dest-btn dest-btn--primary" onClick={() => done('Платёж отправлен')}>
+        <button className="dest-btn dest-btn--primary" onClick={() => setShowConfirm(true)}>
           Уплатить
         </button>
       </div>
+
+      {showConfirm && (
+        <ConfirmActionSheet
+          title="Уплатить 25 369 ₽?"
+          actionLabel="Подписать и уплатить"
+          onConfirm={confirmPayment}
+          onCancel={() => setShowConfirm(false)}
+        />
+      )}
+
+      {showResult && (
+        <FlowResultModal title="Платёж отправлен!" onDone={finishFromResult}>
+          <p>Вы уплатили 25 369 ₽ взносов.</p>
+          <p>Информация по платежу появится в ленте событий в течение 5 минут.</p>
+        </FlowResultModal>
+      )}
 
       {toast && <div className="dest-toast">{toast}</div>}
     </div>

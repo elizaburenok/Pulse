@@ -1,7 +1,11 @@
 import { useState } from 'react'
-import { ArrowLeft, ChevronRight, Circle, HelpCircle } from 'lucide-react'
+import { ArrowLeft, ChevronRight, HelpCircle, Plus } from 'lucide-react'
+import PencilIcon from '../components/icons/PencilIcon'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useRiskState } from '../context/RiskStateContext'
+import FlowResultModal from '../components/risks/FlowResultModal'
 import taxesLogo from '../logo/Taxes.png'
+import documentLogo from '../logo/Document.png'
 import './DestinationPage.css'
 
 const CHECK_ITEMS = [
@@ -14,16 +18,27 @@ const CHECK_ITEMS = [
 export default function EnsNotificationPage() {
   const navigate = useNavigate()
   const location = useLocation()
+  const { closeTask } = useRiskState()
   const [toast, setToast] = useState<string | null>(null)
-  const backState = location.state ?? undefined
+  const [showResult, setShowResult] = useState(false)
+  const navState = location.state as { reopenDrawerId?: string; taskId?: string } | null
+  const backState = navState?.reopenDrawerId ? { reopenDrawerId: navState.reopenDrawerId } : undefined
 
   function goBack() {
     navigate('/risks', { state: backState })
   }
 
+  // Задача выполнена — закрываем её (исчезнет из списка) и возвращаемся.
   function done(msg: string) {
     setToast(msg)
+    if (navState?.taskId) closeTask(navState.taskId)
     window.setTimeout(() => navigate('/risks', { state: backState }), 900)
+  }
+
+  // «Готово» в результате флоу: закрываем задачу и сразу возвращаемся к рискам.
+  function finishFromResult() {
+    if (navState?.taskId) closeTask(navState.taskId)
+    navigate('/risks', { state: backState })
   }
 
   return (
@@ -54,7 +69,7 @@ export default function EnsNotificationPage() {
                   <span className="ens-step__title">{it.title}</span>
                   <span className="ens-step__desc">{it.desc}</span>
                 </span>
-                <Circle size={22} color="var(--color-primitive-neutral-3, #c8c8c8)" />
+                <PencilIcon size={24} className="ens-step__icon" />
               </li>
             ))}
           </ul>
@@ -71,7 +86,7 @@ export default function EnsNotificationPage() {
                   Загрузите выписку в формате 1С и проверьте систему налогообложения
                 </span>
               </span>
-              <Circle size={22} color="var(--color-primitive-neutral-3, #c8c8c8)" />
+              <Plus size={24} color="var(--color-primitive-brand, #835de1)" strokeWidth={2} />
             </li>
           </ul>
         </section>
@@ -101,15 +116,11 @@ export default function EnsNotificationPage() {
           </button>
           <div className="ens-widget__body">
             <div className="ens-widget__cell">
-              <span className="ens-widget__doc-icon">
-                <Circle size={20} color="var(--color-primitive-secondary, #676767)" />
-              </span>
+              <img className="ens-widget__doc-icon" src={documentLogo} alt="" aria-hidden="true" />
               <span className="ens-widget__cell-title">Уведомление по ЕНП</span>
             </div>
             <div className="ens-widget__cell">
-              <span className="ens-widget__doc-icon">
-                <Circle size={20} color="var(--color-primitive-secondary, #676767)" />
-              </span>
+              <img className="ens-widget__doc-icon" src={documentLogo} alt="" aria-hidden="true" />
               <span className="ens-widget__cell-title">Уведомление по ЕНП</span>
             </div>
           </div>
@@ -128,10 +139,20 @@ export default function EnsNotificationPage() {
         <button className="dest-btn dest-btn--secondary" onClick={() => done('Отмечено как сдано')}>
           Уже сдано
         </button>
-        <button className="dest-btn dest-btn--primary" onClick={() => done('Уведомление отправлено')}>
+        <button className="dest-btn dest-btn--primary" onClick={() => setShowResult(true)}>
           Отправить
         </button>
       </div>
+
+      {showResult && (
+        <FlowResultModal title="Уведомление отправлено!" onDone={finishFromResult}>
+          <p>Уведомление по единому налоговому платежу отправлено в налоговую.</p>
+          <p>
+            Вы можете посмотреть уведомление и его статус в разделе{' '}
+            <span className="flow-result__accent">«Онлайн-бухгалтерия»</span>
+          </p>
+        </FlowResultModal>
+      )}
 
       {toast && <div className="dest-toast">{toast}</div>}
     </div>

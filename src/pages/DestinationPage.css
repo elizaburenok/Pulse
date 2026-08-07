@@ -84,12 +84,14 @@
 }
 
 .dest-chip {
+  align-self: flex-start;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 14px;
+  height: 40px;
+  padding: 0 12px;
   border-radius: 10px;
-  background: var(--color-bg-brand-2, #e2ddf6);
+  background: var(--color-container-transparent-1, rgba(25, 25, 25, 0.05));
   font-family: var(--font-ttn);
   font-size: 14px;
   font-weight: 500;
@@ -106,10 +108,10 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 20px 24px;
+  padding: 32px 20px;
   border-radius: 16px;
   background: var(--color-bg-default, #fff);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 7.5px rgba(0, 0, 0, 0.05);
   text-align: left;
   transition: box-shadow 0.15s;
 }
@@ -122,17 +124,26 @@
 .dest-account__text {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+}
+
+.dest-tile__text {
+  gap: 10px;
+}
+
+.dest-account__text {
+  gap: 8px;
 }
 
 .dest-tile__title {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
   color: var(--color-primitive-primary, #191919);
 }
 
 .dest-tile__desc {
   font-size: 14px;
+  line-height: 18px;
   color: var(--color-primitive-secondary, #676767);
 }
 
@@ -140,6 +151,12 @@
   font-size: 16px;
   line-height: 20px;
   color: var(--color-primitive-primary, #191919);
+}
+
+.dest-navigators {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .dest-context {
@@ -179,21 +196,23 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 16px 24px;
-  border-radius: 16px;
-  background: var(--color-bg-neutral-1, #f4f4f4);
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: var(--color-container-transparent-1, rgba(25, 25, 25, 0.05));
   text-align: left;
-  margin-top: 4px;
 }
 
 .dest-account__label {
-  font-size: 13px;
-  color: var(--color-primitive-secondary, #676767);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--color-primitive-primary, #191919);
 }
 
 .dest-account__value {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 400;
+  line-height: 20px;
   color: var(--color-primitive-primary, #191919);
 }
 
@@ -219,7 +238,7 @@
 }
 
 .dest-btn--secondary {
-  background: var(--color-bg-neutral-1, #f4f4f4);
+  background: #eee;
   color: var(--color-primitive-primary, #191919);
 }
 
@@ -274,52 +293,6 @@
   line-height: 48px;
 }
 
-.dest-page--contrib .dest-chip {
-  align-self: flex-start;
-  height: 40px;
-  padding: 0 12px;
-  border-radius: 10px;
-  background: var(--color-container-transparent-1, rgba(25, 25, 25, 0.05));
-}
-
-.dest-page--contrib .dest-tile {
-  padding: 32px 20px;
-  box-shadow: 0 5px 7.5px rgba(0, 0, 0, 0.05);
-}
-
-.dest-page--contrib .dest-tile__title {
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 26px;
-}
-
-.dest-page--contrib .dest-tile__desc {
-  line-height: 18px;
-}
-
-.dest-page--contrib .dest-account {
-  margin-top: 0;
-  padding: 12px 20px;
-  border-radius: 12px;
-  background: var(--color-container-transparent-1, rgba(25, 25, 25, 0.05));
-}
-
-.dest-page--contrib .dest-account__text {
-  gap: 8px;
-}
-
-.dest-page--contrib .dest-account__label {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 18px;
-  color: var(--color-primitive-primary, #191919);
-}
-
-.dest-page--contrib .dest-account__value {
-  font-size: 16px;
-  line-height: 20px;
-}
-
 .dest-account__accessory {
   display: flex;
   align-items: center;
@@ -328,8 +301,8 @@
 }
 
 .dest-flag {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   flex-shrink: 0;
   background: linear-gradient(
@@ -346,10 +319,6 @@
   height: 50px;
   border-radius: 10px;
   font-size: 18px;
-}
-
-.dest-page--contrib .dest-btn--secondary {
-  background: var(--color-container-transparent-1, rgba(25, 25, 25, 0.05));
 }
 
 /* ══ Страница уведомления по ЕНП ══ */
@@ -465,6 +434,10 @@
   flex-shrink: 0;
 }
 
+.ens-step__icon {
+  color: var(--color-primitive-brand, #835de1);
+}
+
 /* Правая колонка виджетов — как на главной интернет-банка (бордер-карточки) */
 .ens-widgets {
   position: absolute;
@@ -523,11 +496,7 @@
   width: 40px;
   height: 40px;
   flex-shrink: 0;
-  border-radius: 12px;
-  background: rgba(25, 25, 25, 0.05);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-fit: contain;
 }
 
 .ens-widget__cell-text {

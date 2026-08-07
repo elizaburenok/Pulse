@@ -103,7 +103,10 @@ function pluralPayments(n: number): string {
 /**
  * Контент карточки категории. Если рисковых задач больше одной, карточка не
  * называет конкретную задачу — показывает их число и ближайший срок
- * (node 40000964-61010), иначе — статический текст из CATEGORIES.
+ * (node 40000964-61010). Если задача ровно одна — карточка называет именно
+ * её (не статический текст категории: он может описывать уже закрытую
+ * задачу, например налог, когда осталась только задача по взносам).
+ * Иначе (задач нет) — статический текст из CATEGORIES.
  */
 export function cardContent(category: CategoryDef, severity: Severity, tasks: Task[]): CardContent {
   if (severity !== 'ok' && tasks.length > 1) {
@@ -111,6 +114,13 @@ export function cardContent(category: CategoryDef, severity: Severity, tasks: Ta
     return {
       title: pluralPayments(tasks.length),
       subtitle: severity === 'overdue' ? `Срок вышел ${nearest.date}` : `До ${nearest.date}`,
+    }
+  }
+  if (severity !== 'ok' && tasks.length === 1) {
+    const task = tasks[0]
+    return {
+      title: task.title,
+      subtitle: severity === 'overdue' ? `Срок вышел ${task.date}` : `До ${task.date}`,
     }
   }
   return category.content[severity]
