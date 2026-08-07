@@ -16,6 +16,18 @@ export default function StateToggle() {
     navigate('/')
   }
 
+  // Точка входа зависит от статуса. «Обратите внимание» (сценарий risk) —
+  // вход из онлайн-бухгалтерии, поэтому переключение на него открывает
+  // страницу /accounting. Для «Всё в порядке» и «Серьёзно рискуете» точка
+  // входа — интернет-банк, навигацию не форсируем (остаёмся где были).
+  // Навигация завязана только на смену сценария, а не на закрытие задач,
+  // поэтому если клиент закроет задачи и статус станет «Всё в порядке» —
+  // он бесшовно останется в онлайн-бухгалтерии.
+  function selectScenario(id: (typeof SCENARIO_ORDER)[number]) {
+    setScenarioId(id)
+    if (id === 'risk') navigate('/accounting')
+  }
+
   return (
     <div className="state-toggle" role="group" aria-label="Состояние прототипа">
       {SCENARIO_ORDER.map((id) => (
@@ -25,7 +37,7 @@ export default function StateToggle() {
           className={
             id === scenarioId ? 'state-toggle__btn state-toggle__btn--on' : 'state-toggle__btn'
           }
-          onClick={() => setScenarioId(id)}
+          onClick={() => selectScenario(id)}
         >
           {SCENARIOS[id].label}
         </button>

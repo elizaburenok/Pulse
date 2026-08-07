@@ -51,6 +51,7 @@ export default function TasksDrawer({ open, title, tasks, severity, onClose, onS
                   <span className="drawer__item-title">{task.title}</span>
                   <span className="drawer__item-due">{dueLabel(severity, task.date)}</span>
                 </span>
+                {task.amount && <span className="drawer__item-amount">{task.amount}</span>}
               </button>
             </li>
           ))}

@@ -109,12 +109,24 @@
   color: var(--color-primitive-primary, #191919);
 }
 
-/* TTN 500/S (Medium 14/18, tracking 0.14px). Дровер открывается только для
-   рисковых категорий (обратите внимание / серьёзно рискуете) — срок всегда красный. */
+/* TTN 500/S (Medium 14/18, tracking 0.14px). Срок платежа — всегда красный,
+   независимо от уровня (attention/overdue), как на странице уплаты. */
 .drawer__item-due {
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
   letter-spacing: 0.14px;
   color: var(--color-primitive-error, #d84d4d);
+}
+
+/* Сумма уплаты — аксессуар справа (как в навигаторе задач бухгалтерии). */
+.drawer__item-amount {
+  margin-left: auto;
+  padding-left: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.16px;
+  color: var(--color-primitive-primary, #191919);
+  white-space: nowrap;
 }

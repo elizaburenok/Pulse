@@ -1,0 +1,447 @@
+/* Онлайн-бухгалтерия. Колонки: левый навигатор 280px, центр 720px (20px по
+   бокам → внутр. 680), справа зарезервировано 280px. Раскладка — по образцу
+   HomePage: левый навигатор абсолютный, контент со сдвигом под него. */
+
+.acc-page {
+  flex: 1;
+  position: relative;
+  background: var(--color-page-secondary, #f9f9f9);
+  min-height: calc(100dvh - 74px);
+}
+
+/* ── Левая колонка ── */
+.acc-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 280px;
+  min-height: 100%;
+  padding: 32px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.acc-nav__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-separator, #e1e1e1);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--color-primary, #191919);
+  transition: background 0.15s;
+}
+
+.acc-nav__back:hover {
+  background: var(--color-btn-bg, rgba(25, 25, 25, 0.05));
+}
+
+.acc-nav__head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.acc-nav__title {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 30px;
+  color: var(--color-primary, #191919);
+}
+
+.acc-nav__subtitle {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  color: var(--color-secondary, #676767);
+}
+
+.acc-nav__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 4px;
+}
+
+.acc-nav__link {
+  text-align: left;
+  font-family: var(--font-ttn);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0.14px;
+  color: var(--color-primary, #191919);
+  background: none;
+  transition: opacity 0.15s;
+}
+
+.acc-nav__link:hover {
+  opacity: 0.6;
+}
+
+/* ── Центральная + правая колонки ── */
+/* Блок (центр + правый резерв) центрируется в пространстве справа от
+   навигатора, а не прижимается к нему фиксированным отступом. */
+.acc-main {
+  margin-left: 280px;
+  padding: 32px 0 80px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.acc-col {
+  width: 720px;
+  flex-shrink: 0;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.acc-right {
+  width: 280px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+/* ── Кнопки-хедер ── */
+.acc-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.acc-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  background: var(--color-btn-bg, rgba(25, 25, 25, 0.05));
+  font-family: var(--font-ttn);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0.14px;
+  color: var(--color-brand, #835de1);
+  transition: background 0.15s;
+}
+
+.acc-action-btn:hover {
+  background: rgba(25, 25, 25, 0.09);
+}
+
+/* ── Стопка навигаторов ── */
+.acc-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.acc-chevron {
+  color: var(--color-primary, #191919);
+  flex-shrink: 0;
+}
+
+/* Навигатор «Пульс бухгалтерии» */
+.acc-pulse {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  text-align: left;
+  background: var(--color-card-bg, #ffffff);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card, 0 5px 15px rgba(0, 0, 0, 0.05));
+  padding: 20px;
+  transition: opacity 0.15s, transform 0.05s;
+}
+
+.acc-pulse:hover {
+  opacity: 0.75;
+}
+
+.acc-pulse:active {
+  transform: translateY(1px);
+}
+
+.acc-pulse__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.acc-pulse__title {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+  color: var(--color-primary, #191919);
+}
+
+.acc-pulse__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.acc-pulse__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.acc-pulse__status {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.16px;
+  color: var(--color-primary, #191919);
+}
+
+.acc-pulse__desc {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.14px;
+  color: var(--color-secondary, #676767);
+}
+
+/* Навигаторы «Задачи» / «Общение с госорганами» */
+.acc-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--color-card-bg, #ffffff);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card, 0 5px 15px rgba(0, 0, 0, 0.05));
+  padding: 20px;
+}
+
+.acc-card__head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.acc-card__head--link {
+  background: none;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.acc-card__head--link:hover {
+  opacity: 0.6;
+}
+
+.acc-card__title {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+  color: var(--color-primary, #191919);
+}
+
+.acc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.acc-list__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.acc-list__logo {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.acc-list__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.acc-list__title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.16px;
+  color: var(--color-primary, #191919);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.acc-list__due {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0.14px;
+  color: #e0655c;
+}
+
+.acc-list__due--overdue {
+  color: var(--color-error, #d84d4d);
+}
+
+.acc-list__due--muted {
+  font-weight: 400;
+  color: var(--color-secondary, #676767);
+}
+
+.acc-list__amount {
+  margin-left: auto;
+  padding-left: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.16px;
+  color: var(--color-primary, #191919);
+  white-space: nowrap;
+}
+
+.acc-badge {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--color-error, #d84d4d);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15px;
+}
+
+.acc-list__clock {
+  margin-left: auto;
+  color: var(--color-secondary, #676767);
+  flex-shrink: 0;
+}
+
+.acc-card__more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--color-btn-bg, rgba(25, 25, 25, 0.05));
+  font-family: var(--font-ttn);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0.14px;
+  color: var(--color-primary, #191919);
+  transition: background 0.15s;
+}
+
+.acc-card__more:hover {
+  background: rgba(25, 25, 25, 0.09);
+}
+
+/* ── Компактные карточки разделов ── */
+.acc-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.acc-section-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 118px;
+  padding: 15px;
+  border-radius: 10px;
+  background: var(--color-card-bg, #ffffff);
+  box-shadow: var(--shadow-section, 0 5px 7.5px rgba(0, 0, 0, 0.05));
+}
+
+.acc-section-card__icon {
+  display: flex;
+  color: var(--color-primary, #191919);
+}
+
+.acc-section-card__text {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.acc-section-card__title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0.14px;
+  color: var(--color-primary, #191919);
+}
+
+.acc-section-card__subtitle {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0.14px;
+  color: var(--color-secondary, #676767);
+}
+
+/* ── Список действий ── */
+.acc-page-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.acc-page-action {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.acc-page-action__icon {
+  display: flex;
+  flex-shrink: 0;
+  color: var(--color-primary, #191919);
+}
+
+.acc-page-action__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.acc-page-action__title {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--color-primary, #191919);
+}
+
+.acc-page-action__subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.14px;
+  color: var(--color-secondary, #676767);
+}

@@ -23,7 +23,7 @@ const RANK: Record<Severity, number> = { overdue: 0, attention: 1, ok: 2 }
 export default function RisksPage() {
   const navigate = useNavigate()
   const location = useLocation()
-  const { levels, openTasks } = useRiskState()
+  const { levels, openTasks, entryPath } = useRiskState()
   const [drawerId, setDrawerId] = useState<CategoryId | null>(null)
   const [toast, setToast] = useState<string | null>(null)
 
@@ -68,6 +68,11 @@ export default function RisksPage() {
 
   function handleCard(id: CategoryId) {
     const tasks = openTasks[id]
+    // Операции без задач в риске — ведём на страницу подключения маркетплейсов.
+    if (id === 'operations' && levels[id] !== 'ok' && tasks.length === 0) {
+      navigate('/risks/marketplaces')
+      return
+    }
     if (tasks.length > 1) {
       setDrawerId(id)
     } else if (tasks.length === 1) {
@@ -79,7 +84,7 @@ export default function RisksPage() {
 
   return (
     <div className="risks-page">
-      <button className="risks-back" onClick={() => navigate('/')} aria-label="Назад">
+      <button className="risks-back" onClick={() => navigate(entryPath)} aria-label="Назад">
         <ArrowLeft size={20} />
       </button>
 
