@@ -1,7 +1,7 @@
 import { Search, ChevronsLeft, FileText, Building2, Tag, Key, Camera, MoreHorizontal, Plus, SlidersHorizontal, ChevronRight, ChevronDown, EyeOff } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useRiskState } from '../context/RiskStateContext'
-import { dueLabel } from '../data/riskContent'
+import { aggregateStatus, dueLabel } from '../data/riskContent'
 import { riskyTaskRows } from '../data/tasks'
 import RiskRightColumn from '../components/home/RiskRightColumn'
 import TaskStack, { type HomeTaskItem } from '../components/home/TaskStack'
@@ -93,7 +93,12 @@ export default function HomePage() {
     onOpen: () => openAccountingTask(task.id, task.target),
   }))
 
-  const homeTasks: HomeTaskItem[] = [...accountingTasks, ...OTHER_SERVICE_TASKS]
+  // Задачи других сервисов — демо-заглушки для показа стека. По макету
+  // проявляются только при статусе «Серьёзно рискуете», в остальных
+  // сценариях (включая «Всё в порядке») аккордеон задач пуст.
+  const otherServiceTasks = aggregateStatus(levels) === 'overdue' ? OTHER_SERVICE_TASKS : []
+
+  const homeTasks: HomeTaskItem[] = [...accountingTasks, ...otherServiceTasks]
 
   return (
     <div className="home-page">
