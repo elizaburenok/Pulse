@@ -1,7 +1,8 @@
 import { ChevronRight, ChevronsRight, SlidersHorizontal } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useRiskState } from '../../context/RiskStateContext'
-import { aggregateStatus, type PageStatus } from '../../data/riskContent'
+import { aggregateStatus, dueLabel, type PageStatus } from '../../data/riskContent'
+import { riskyTaskRows, taskLogo } from '../../data/tasks'
 import PulseFace from '../risks/PulseFace'
 import taxesLogo from '../../logo/Taxes.png'
 import contributionsLogo from '../../logo/Contributions.png'
@@ -14,30 +15,42 @@ const WIDGET_TEXT: Record<PageStatus, { title: string; subtitle: string }> = {
   overdue: { title: 'Серьёзно рискуете', subtitle: 'Решите вопросы, чтобы избежать блокировки' },
 }
 
-const TASKS = [
-  {
-    title: 'Страховые взносы в I кв. за 2020',
-    desc: '5 800 ₽, с 1 по 25 августа',
-    logo: contributionsLogo,
-  },
-  {
-    title: 'Налог по УСН в I кв. за 2020',
-    desc: '120 375,78 ₽, с 27 сентября по 15 октября 2020',
-    logo: taxesLogo,
-  },
-  {
-    title: 'Декларация УСН за 2019',
-    desc: 'С 3 по 20 октября',
-    logo: declarationLogo,
-  },
+interface WidgetTask {
+  key: string
+  logo: string
+  title: string
+  due: string
+  overdue: boolean
+}
+
+// Будущие задачи для статуса «Всё в порядке»: срок ещё не подошёл (после
+// 2026-08-09), это не риск — показываем нейтрально «До …».
+const UPCOMING_TASKS: WidgetTask[] = [
+  { key: 'u-usn-q3', logo: taxesLogo, title: 'Налог по УСН за III кв. 2026', due: 'До 28 октября, 486 973 ₽', overdue: false },
+  { key: 'u-contributions', logo: contributionsLogo, title: 'Взносы с доходов за 2026', due: 'До 31 декабря, 45 842 ₽', overdue: false },
+  { key: 'u-declaration', logo: declarationLogo, title: 'Декларация по УСН за 2026', due: 'До 27 апреля 2027', overdue: false },
 ]
 
 /** Правая колонка главной: виджет «Пульс бухгалтерии» (вход в раздел рисков). */
 export default function RiskRightColumn() {
   const navigate = useNavigate()
-  const { levels, setEntryPath } = useRiskState()
+  const { openTasks, levels, setEntryPath } = useRiskState()
   const status = aggregateStatus(levels)
   const text = WIDGET_TEXT[status]
+
+  // Задачи бухгалтерии: если есть рисковые (срок близко/вышел) — показываем их
+  // синхронно со статусом; иначе — будущие задачи (срок ещё не подошёл).
+  const riskyRows = riskyTaskRows(openTasks, levels)
+  const widgetTasks: WidgetTask[] =
+    riskyRows.length > 0
+      ? riskyRows.map(({ task, severity }) => ({
+          key: task.id,
+          logo: taskLogo(task),
+          title: task.title,
+          due: dueLabel(severity, task.date) + (task.amount ? `, ${task.amount}` : ''),
+          overdue: severity === 'overdue',
+        }))
+      : UPCOMING_TASKS
 
   // Вход во флоу рисков из виджета интернет-банка — «Назад» вернёт на главную.
   function openRisks() {
@@ -72,22 +85,30 @@ export default function RiskRightColumn() {
       </button>
 
       <div className="side-card">
-        <div className="side-card__head">
+        <button className="side-card__head side-card__head--link" onClick={openRisks}>
           <span className="side-card__title">Задачи бухгалтерии</span>
           <ChevronRight size={18} color="var(--color-primitive-primary)" />
-        </div>
+        </button>
         <ul className="side-card__list">
-          {TASKS.map((task) => (
-            <li key={task.title} className="side-card__item">
+          {widgetTasks.map((task) => (
+            <li key={task.key} className="side-card__item">
               <img className="side-card__dot" src={task.logo} alt="" aria-hidden="true" />
               <div className="side-card__item-text">
                 <p className="side-card__item-title">{task.title}</p>
-                <p className="side-card__item-desc">{task.desc}</p>
+                <p
+                  className={
+                    task.overdue
+                      ? 'side-card__item-desc side-card__item-desc--overdue'
+                      : 'side-card__item-desc'
+                  }
+                >
+                  {task.due}
+                </p>
               </div>
             </li>
           ))}
         </ul>
-        <button className="side-card__more">Показать все</button>
+        <button className="side-card__more" onClick={openRisks}>Показать все</button>
       </div>
 
       <div className="risk-biz">

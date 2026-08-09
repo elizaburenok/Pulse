@@ -1,0 +1,82 @@
+.task-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  background: #E2DDF6;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  text-align: left;
+  transition: opacity 0.15s;
+}
+
+.task-card:hover {
+  opacity: 0.85;
+}
+
+/* Просроченная задача — критичная (красная). */
+.task-card--overdue {
+  background: var(--color-bg-error-2, #fcd7d4);
+}
+
+.task-card__label {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0.12px;
+  color: var(--color-secondary);
+}
+
+.task-card__title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: 0.14px;
+  color: var(--color-primary);
+}
+
+.task-card__due {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0.12px;
+  color: var(--color-primary);
+}
+
+/* У просроченной задачи срок — красным и чуть жирнее. */
+.task-card--overdue .task-card__due {
+  color: var(--color-error, #d84d4d);
+  font-weight: 500;
+}
+
+/* Коллапс: верхняя (самая критичная) карточка + «выглядывающая» задача
+   позади — сигнал, что в стеке есть что развернуть. */
+.task-stack__peek-wrap {
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.task-stack__peek-wrap:hover .task-card {
+  opacity: 0.85;
+}
+
+.task-stack__peek {
+  display: block;
+  height: 10px;
+  margin: 0 10px;
+  background: #d6cef3;
+  border-radius: 0 0 12px 12px;
+}
