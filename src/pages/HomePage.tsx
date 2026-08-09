@@ -1,8 +1,31 @@
 import { Search, ChevronsLeft, FileText, Building2, Tag, Key, Camera, MoreHorizontal, Plus, SlidersHorizontal, ChevronRight, ChevronDown, EyeOff } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useRiskState } from '../context/RiskStateContext'
+import { dueLabel } from '../data/riskContent'
+import { riskyTaskRows } from '../data/tasks'
 import RiskRightColumn from '../components/home/RiskRightColumn'
+import TaskStack, { type HomeTaskItem } from '../components/home/TaskStack'
 import './HomePage.css'
+
+// Задачи других сервисов банка — независимы от риска бухгалтерии, показаны
+// для демонстрации стека при >3 задачах (Bank-Patterns, node 82343-57751).
+// Не кликабельны — заглушки, у прототипа нет их страниц выполнения.
+const OTHER_SERVICE_TASKS: HomeTaskItem[] = [
+  {
+    id: 'compliance-request',
+    label: 'Комплаенс',
+    title: 'Ответьте на запрос, чтобы избежать ограничений',
+    due: 'До 29 ноября не позднее 23:59',
+    severity: 'overdue',
+  },
+  {
+    id: 'acquiring-docs',
+    label: 'Эквайринг',
+    title: 'Загрузите документы',
+    due: 'Нужно загрузить подписанные документы',
+    severity: 'attention',
+  },
+]
 
 const QUICK_ACTIONS = [
   { icon: <FileText size={20} />, label: 'Скачать выписку' },
@@ -44,13 +67,33 @@ const TRANSACTIONS = [
 
 export default function HomePage() {
   const navigate = useNavigate()
-  const { setEntryPath } = useRiskState()
+  const { openTasks, levels, setEntryPath } = useRiskState()
 
-  // Вход во флоу рисков из интернет-банка — «Назад» вернёт на главную.
-  function openRisks() {
+  // Задачи-риски бухгалтерии (категория не «ok»), отсортированные по
+  // приоритету. В статусе «Всё в порядке» их нет.
+  const riskyRows = riskyTaskRows(openTasks, levels)
+
+  // Клик по задаче бухгалтерии — вход во флоу рисков (страница выполнения),
+  // «Назад» вернёт на главную.
+  function openAccountingTask(taskId: string, target: 'tax' | 'contributions' | 'ens' | null) {
     setEntryPath('/')
-    navigate('/risks')
+    const state = { taskId }
+    if (target === 'tax') navigate('/risks/tax', { state })
+    else if (target === 'contributions') navigate('/risks/contributions', { state })
+    else if (target === 'ens') navigate('/risks/ens', { state })
+    else navigate('/risks')
   }
+
+  const accountingTasks: HomeTaskItem[] = riskyRows.map(({ task, severity }) => ({
+    id: task.id,
+    label: 'Онлайн-бухгалтерия',
+    title: task.title,
+    due: dueLabel(severity, task.date) + (task.amount ? `, ${task.amount}` : ''),
+    severity,
+    onOpen: () => openAccountingTask(task.id, task.target),
+  }))
+
+  const homeTasks: HomeTaskItem[] = [...accountingTasks, ...OTHER_SERVICE_TASKS]
 
   return (
     <div className="home-page">
@@ -106,14 +149,8 @@ export default function HomePage() {
           <input className="home-search__input" placeholder="Поиск по Точке" readOnly />
         </div>
 
-        {/* Напоминание об уплате налога — ведёт в раздел рисков */}
-        <button className="home-mp-banner" onClick={openRisks}>
-          <div className="home-mp-banner__text">
-            <p className="home-mp-banner__title">Уплатите налог по УСН за I квартал</p>
-            <p className="home-mp-banner__subtitle">до 28 апреля вам нужно уплатить 1 469 ₽</p>
-          </div>
-          <ChevronRight size={20} color="var(--color-brand)" className="home-mp-banner__chevron" />
-        </button>
+        {/* Стек задач: бухгалтерские риски + демо-задачи других сервисов. */}
+        <TaskStack tasks={homeTasks} />
 
         {/* Accounts */}
         <div className="home-section">

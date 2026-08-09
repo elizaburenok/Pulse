@@ -18,48 +18,13 @@ import {
 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useRiskState } from '../context/RiskStateContext'
-import {
-  aggregateStatus,
-  dueLabel,
-  type CategoryId,
-  type PageStatus,
-  type Severity,
-  type Task,
-} from '../data/riskContent'
+import { aggregateStatus, dueLabel, type PageStatus } from '../data/riskContent'
+import { taskLogo, taskRows } from '../data/tasks'
 import PulseFace from '../components/risks/PulseFace'
-import taxesLogo from '../logo/Taxes.png'
-import contributionsLogo from '../logo/Contributions.png'
-import reportLogo from '../logo/Report.svg'
 import mailLogo from '../logo/Mail.svg'
 import taxDocumentLogo from '../logo/Tax Document.svg'
 import taxReportsLogo from '../logo/Tax Reports.svg'
 import './AccountingPage.css'
-
-// Порядок задач для плоского списка. Налоги раньше отчётности — так при
-// равном сроке (25 июля) налог по УСН оказывается выше уведомления по ЕНП,
-// как в макете.
-const TASK_ORDER: CategoryId[] = ['taxes', 'reporting', 'operations', 'limit', 'patent']
-const RANK: Record<Severity, number> = { overdue: 0, attention: 1, ok: 2 }
-
-const MONTHS = [
-  'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
-  'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря',
-]
-
-/** Числовой ключ срока «25 июля» для сортировки по срочности. */
-function dueKey(date: string): number {
-  const [dayStr, monthStr] = date.split(' ')
-  const day = Number.parseInt(dayStr, 10) || 0
-  const month = MONTHS.indexOf(monthStr)
-  return (month < 0 ? 12 : month) * 100 + day
-}
-
-/** Логотип задачи — из библиотеки logo. Уведомления (без icon) → «Report». */
-function taskLogo(task: Task): string {
-  if (task.icon === 'taxes') return taxesLogo
-  if (task.icon === 'contributions') return contributionsLogo
-  return reportLogo
-}
 
 // Навигатор «Пульс»: собственные тексты статуса (заголовок — как везде,
 // подзаголовок — из макета онлайн-бухгалтерии).
@@ -137,11 +102,7 @@ export default function AccountingPage() {
   const pulse = PULSE_TEXT[status]
 
   // Плоский список задач всех категорий, отсортированный по срочности.
-  const taskRows = TASK_ORDER.flatMap((id) =>
-    openTasks[id].map((task) => ({ task, severity: levels[id] })),
-  ).sort(
-    (a, b) => RANK[a.severity] - RANK[b.severity] || dueKey(a.task.date) - dueKey(b.task.date),
-  )
+  const rows = taskRows(openTasks, levels)
 
   return (
     <div className="acc-page">
@@ -205,7 +166,7 @@ export default function AccountingPage() {
                 <ChevronRight size={18} className="acc-chevron" />
               </button>
               <ul className="acc-list">
-                {taskRows.map(({ task, severity }) => (
+                {rows.map(({ task, severity }) => (
                   <li key={task.id} className="acc-list__item">
                     <img className="acc-list__logo" src={taskLogo(task)} alt="" aria-hidden="true" />
                     <div className="acc-list__text">

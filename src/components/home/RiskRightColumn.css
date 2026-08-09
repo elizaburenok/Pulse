@@ -163,6 +163,22 @@
   color: var(--color-primitive-secondary, #676767);
 }
 
+/* Просроченная задача — подпись «Срок вышел …» красная. */
+.side-card__item-desc--overdue {
+  font-weight: 500;
+  color: var(--color-error, #d84d4d);
+}
+
+/* Заголовок-ссылка «Задачи бухгалтерии» → переход в риски. */
+.side-card__head--link {
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
 .side-card__more {
   display: flex;
   align-items: center;

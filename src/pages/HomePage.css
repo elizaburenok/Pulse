@@ -201,58 +201,6 @@
   color: var(--color-secondary);
 }
 
-/* ── Marketplace promo banner ── */
-.home-mp-banner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  width: 100%;
-  background: #E2DDF6;
-  border: none;
-  border-radius: 12px;
-  padding: 16px 20px;
-  cursor: pointer;
-  text-align: left;
-  transition: opacity 0.15s;
-}
-
-.home-mp-banner:hover {
-  opacity: 0.85;
-}
-
-.home-mp-banner__text {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.home-mp-banner__label {
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-  letter-spacing: 0.12px;
-  color: var(--color-secondary);
-}
-
-.home-mp-banner__title {
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 20px;
-  color: var(--color-primary);
-}
-
-.home-mp-banner__subtitle {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 18px;
-  color: var(--color-secondary);
-}
-
-.home-mp-banner__chevron {
-  flex-shrink: 0;
-}
-
 /* ── Alert cards ── */
 .home-alerts {
   display: grid;
