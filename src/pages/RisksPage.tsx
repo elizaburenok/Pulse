@@ -115,12 +115,12 @@ export default function RisksPage() {
           ))}
         </div>
 
-        <button className="risks-page-action" onClick={() => showToast('Что влияет на пульс')}>
+        <button className="risks-page-action" onClick={() => showToast('Что влияет на Пульс')}>
           <span className="risks-page-action__icon" aria-hidden="true">
             <HeartPulseIcon size={30} />
           </span>
           <span className="risks-page-action__text">
-            <span className="risks-page-action__title">Что влияет на пульс</span>
+            <span className="risks-page-action__title">Что влияет на Пульс</span>
             <span className="risks-page-action__desc">Возможность снизить риски</span>
           </span>
         </button>
