@@ -178,7 +178,7 @@ const CATEGORY_SUBTITLE: Record<CategoryId, Record<'attention' | 'overdue', stri
 
 const OK_SUBTITLE =
   'Налоги уплачены, отчётность сдана. Чувствуете? Даже дышится свободнее.'
-const MULTI_ATTENTION = 'Есть вопросы в нескольких разделах — решите их, чтобы не получить пени'
+const MULTI_ATTENTION = 'Есть риски в нескольких разделах — решите их, чтобы не получить пени'
 const MULTI_OVERDUE = 'Несколько вопросов требуют срочного решения — иначе счёт заблокируют'
 
 export interface HeaderText {
