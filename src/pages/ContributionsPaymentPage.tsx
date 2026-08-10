@@ -55,7 +55,7 @@ export default function ContributionsPaymentPage() {
       <main className="dest-main">
         <div className="dest-amount">
           <p className="dest-amount__value">25 369 ₽</p>
-          <p className="dest-amount__due">{dueLabel(levels.taxes, '28 июля')}</p>
+          <p className="dest-amount__due">{dueLabel(levels.taxes, '28 августа')}</p>
         </div>
 
         <button className="dest-chip" onClick={() => setToast('Изменение суммы недоступно в прототипе')}>
