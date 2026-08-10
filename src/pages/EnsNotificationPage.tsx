@@ -59,7 +59,7 @@ export default function EnsNotificationPage() {
           <h2 className="ens-header__title">
             {overdue
               ? 'Проверьте и отправьте уведомление, как можно скорее'
-              : 'Проверьте и отправьте уведомление до 25 июля'}
+              : 'Проверьте и отправьте уведомление до 25 августа'}
           </h2>
           <p className="ens-header__sub">Тогда налоговая верно учтёт ваши налоги и страховые взносы</p>
         </header>

@@ -74,7 +74,7 @@ export default function TaxPaymentPage() {
       <main className="dest-main">
         <div className="dest-amount">
           <p className="dest-amount__value">486 973 ₽</p>
-          <p className="dest-amount__due">{dueLabel(levels.taxes, '25 июля')}</p>
+          <p className="dest-amount__due">{dueLabel(levels.taxes, '25 августа')}</p>
         </div>
 
         <button className="dest-chip" onClick={() => setToast('Изменение суммы недоступно в прототипе')}>

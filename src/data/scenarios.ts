@@ -26,7 +26,7 @@ const taxTasks: Task[] = [
   {
     id: 'usn-q2',
     title: 'Налог по УСН за II кв. 2026',
-    date: '25 июля',
+    date: '25 августа',
     target: 'tax',
     icon: 'taxes',
     amount: '486 973 ₽',
@@ -34,7 +34,7 @@ const taxTasks: Task[] = [
   {
     id: 'contributions-2026',
     title: 'Взносы с доходов за 2026',
-    date: '28 июля',
+    date: '28 августа',
     target: 'contributions',
     icon: 'contributions',
     amount: '25 369 ₽',
@@ -43,6 +43,11 @@ const taxTasks: Task[] = [
 
 /** Одна задача по отчётности → сразу на страницу ЕНП. */
 const reportingTask: Task[] = [
+  { id: 'ens-notice', title: 'Уведомление по ЕНП', date: '25 августа', target: 'ens' },
+]
+
+/** Та же задача, но уже просроченная (Кейс 3) — срок остаётся в июле. */
+const reportingTaskOverdue: Task[] = [
   { id: 'ens-notice', title: 'Уведомление по ЕНП', date: '25 июля', target: 'ens' },
 ]
 
@@ -74,7 +79,7 @@ export const SCENARIOS: Record<ScenarioId, Scenario> = {
     label: 'Кейс 3',
     levels: {
       taxes: { level: 'attention', tasks: taxTasks },
-      reporting: { level: 'overdue', tasks: reportingTask },
+      reporting: { level: 'overdue', tasks: reportingTaskOverdue },
       operations: { level: 'overdue', tasks: [] },
       limit: ok(),
       patent: ok(),
