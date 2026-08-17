@@ -19,7 +19,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { useRiskState } from '../context/RiskStateContext'
 import { aggregateStatus, dueLabel, type PageStatus } from '../data/riskContent'
-import { taskLogo, taskRows } from '../data/tasks'
+import { riskSummaryText, taskLogo, taskRows } from '../data/tasks'
 import PulseFace from '../components/risks/PulseFace'
 import mailLogo from '../logo/Mail.svg'
 import taxDocumentLogo from '../logo/Tax Document.svg'
@@ -100,6 +100,9 @@ export default function AccountingPage() {
   }
   const status = aggregateStatus(levels)
   const pulse = PULSE_TEXT[status]
+  // Подзаголовок навигатора называет, что нужно сделать (перечень задач).
+  // В статусе «ok» задач нет — берём прежний статичный текст.
+  const pulseSubtitle = riskSummaryText(openTasks, levels) ?? pulse.subtitle
 
   // Плоский список задач всех категорий, отсортированный по срочности.
   const rows = taskRows(openTasks, levels)
@@ -154,7 +157,7 @@ export default function AccountingPage() {
                 <PulseFace status={status} size={40} />
                 <div className="acc-pulse__text">
                   <p className="acc-pulse__status">{pulse.title}</p>
-                  <p className="acc-pulse__desc">{pulse.subtitle}</p>
+                  <p className="acc-pulse__desc">{pulseSubtitle}</p>
                 </div>
               </div>
             </button>
