@@ -67,9 +67,10 @@ export const SCENARIOS: Record<ScenarioId, Scenario> = {
     id: 'risk',
     label: 'Кейс 2',
     levels: {
-      taxes: { level: 'attention', tasks: taxTasks },
-      reporting: { level: 'attention', tasks: reportingTask },
-      operations: ok(),
+      // Срок ещё не подошёл — задачи видны в «Задачах», но без статуса риска.
+      taxes: { level: 'ok', tasks: taxTasks },
+      reporting: { level: 'ok', tasks: reportingTask },
+      operations: { level: 'attention', tasks: [] },
       limit: ok(),
       patent: ok(),
     },
