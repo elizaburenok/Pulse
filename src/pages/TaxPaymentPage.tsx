@@ -73,7 +73,7 @@ export default function TaxPaymentPage() {
 
       <main className="dest-main">
         <div className="dest-amount">
-          <p className="dest-amount__value">486 973 ₽</p>
+          <p className="dest-amount__value">20 000 ₽</p>
           <p className="dest-amount__due">{dueLabel(levels.taxes, '25 августа')}</p>
         </div>
 
@@ -123,7 +123,7 @@ export default function TaxPaymentPage() {
 
       {showConfirm && (
         <ConfirmActionSheet
-          title="Уплатить 486 973 ₽?"
+          title="Уплатить 20 000 ₽?"
           actionLabel="Подписать и уплатить"
           onConfirm={confirmPayment}
           onCancel={() => setShowConfirm(false)}
@@ -132,7 +132,7 @@ export default function TaxPaymentPage() {
 
       {showResult && (
         <FlowResultModal title="Налог по УСН уплачен!" onDone={finishFromResult}>
-          <p>Отправили платёж 486 973 ₽.</p>
+          <p>Отправили платёж 20 000 ₽.</p>
           <p>Налог по УСН за II квартал 2025 полностью уплачен.</p>
           <p>Информация по платежу появится в ленте событий в течение 5 минут.</p>
         </FlowResultModal>

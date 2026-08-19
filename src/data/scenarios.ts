@@ -29,7 +29,7 @@ const taxTasks: Task[] = [
     date: '25 августа',
     target: 'tax',
     icon: 'taxes',
-    amount: '486 973 ₽',
+    amount: '20 000 ₽',
   },
   {
     id: 'contributions-2026',
