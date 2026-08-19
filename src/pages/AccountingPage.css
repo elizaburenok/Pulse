@@ -292,7 +292,7 @@
   font-weight: 500;
   line-height: 18px;
   letter-spacing: 0.14px;
-  color: #e0655c;
+  color: var(--color-secondary, #676767);
 }
 
 .acc-list__due--overdue {
