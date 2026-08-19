@@ -69,7 +69,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDef> = {
     label: 'Операции',
     content: {
       ok: { title: 'Всё учтено', subtitle: 'Проблем нет' },
-      attention: { title: 'Платёж по ЕНС', subtitle: 'Уточните' },
+      attention: { title: 'Ozon', subtitle: 'Подключите для точных расчётов' },
       overdue: { title: 'Ozon', subtitle: 'Подключите для точных расчётов' },
     },
   },
@@ -162,7 +162,7 @@ const CATEGORY_SUBTITLE: Record<CategoryId, Record<'attention' | 'overdue', stri
     overdue: 'Сдайте отчётность как можно скорее, чтобы избежать блокировки',
   },
   operations: {
-    attention: 'У вас есть неопределённые операции. Уточните, чтобы не получить штраф',
+    attention: 'У вас не подключены маркетплейсы. Подключите их, чтобы доходы учитывались верно',
     overdue: 'Уточните операции как можно скорее, чтобы избежать штрафа',
   },
   limit: {

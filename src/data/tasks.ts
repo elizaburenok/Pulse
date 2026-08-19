@@ -69,14 +69,14 @@ const TASK_IMPERATIVE: Record<string, string> = {
 }
 
 /** Императив по категории — когда категория одна (несколько задач или без задач). */
-function categoryImperative(id: CategoryId, severity: Severity): string {
+function categoryImperative(id: CategoryId): string {
   switch (id) {
     case 'reporting':
       return 'Отправьте уведомление'
     case 'taxes':
       return 'Уплатите налоги и взносы'
     case 'operations':
-      return severity === 'overdue' ? 'Подключите маркетплейсы' : 'Уточните операции'
+      return 'Подключите маркетплейсы'
     case 'patent':
       return 'Уплатите налог по патенту'
     default:
@@ -85,14 +85,14 @@ function categoryImperative(id: CategoryId, severity: Severity): string {
 }
 
 /** Родительный фрагмент для перечня «Выполните задачи по …». */
-function categoryGenitive(id: CategoryId, severity: Severity): string {
+function categoryGenitive(id: CategoryId): string {
   switch (id) {
     case 'reporting':
       return 'отправке уведомления'
     case 'taxes':
       return 'уплате налогов'
     case 'operations':
-      return severity === 'overdue' ? 'подключению маркетплейсов' : 'уточнению операций'
+      return 'подключению маркетплейсов'
     case 'patent':
       return 'уплате налога по патенту'
     default:
@@ -130,9 +130,9 @@ export function riskSummaryText(
     if (tasks.length === 1 && TASK_IMPERATIVE[tasks[0].id]) {
       return TASK_IMPERATIVE[tasks[0].id]
     }
-    return categoryImperative(id, levels[id])
+    return categoryImperative(id)
   }
 
-  const parts = risky.map((id) => categoryGenitive(id, levels[id])).filter(Boolean)
+  const parts = risky.map((id) => categoryGenitive(id)).filter(Boolean)
   return `Выполните задачи по ${joinPhrases(parts)}`
 }
