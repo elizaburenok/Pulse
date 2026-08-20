@@ -69,8 +69,8 @@ export const CATEGORIES: Record<CategoryId, CategoryDef> = {
     label: 'Операции',
     content: {
       ok: { title: 'Всё учтено', subtitle: 'Проблем нет' },
-      attention: { title: 'Ozon', subtitle: 'Подключите для точных расчётов' },
-      overdue: { title: 'Ozon', subtitle: 'Подключите для точных расчётов' },
+      attention: { title: 'Ozon', subtitle: 'Чтобы была верная сумма налога' },
+      overdue: { title: 'Ozon', subtitle: 'Чтобы была верная сумма налога' },
     },
   },
   limit: {

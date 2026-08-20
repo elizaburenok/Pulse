@@ -1,7 +1,7 @@
 import type { PageStatus } from '../../data/riskContent'
 import okIcon from '../../logo/Avatar.png'
-import attentionIcon from '../../logo/Avatar-1.png'
-import overdueIcon from '../../logo/Avatar-2.png'
+import attentionIcon from '../../logo/Warn.png'
+import overdueIcon from '../../logo/Error.png'
 
 interface Props {
   status: PageStatus
